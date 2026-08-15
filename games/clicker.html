@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fox Clicker | Fox Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0b0f; --surface:#16161e; --accent:#ff6b35; --text:#e8e8ed; --muted:#9a9aad; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--text);
+      min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+      padding:1.25rem; gap:1rem;
+    }
+    a { color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    a:hover { color:var(--accent); }
+    h1 { font-family:Orbitron,sans-serif; font-size:1.3rem; color:var(--accent); }
+    .score {
+      font-size:2rem; font-weight:700; font-variant-numeric:tabular-nums;
+      background:linear-gradient(90deg,#ff6b35,#fbbf24);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .rate { color:var(--muted); font-size:0.9rem; }
+    #fox {
+      width:140px; height:140px; border-radius:50%; border:3px solid var(--accent);
+      background:rgba(255,107,53,0.12); display:grid; place-items:center;
+      font-size:4rem; cursor:pointer; user-select:none;
+      box-shadow:0 0 30px rgba(255,107,53,0.3);
+      transition:transform 0.08s;
+    }
+    #fox:active { transform:scale(0.92); }
+    .shop {
+      display:flex; flex-direction:column; gap:0.5rem; width:min(340px,94vw);
+    }
+    .shop button {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:0.7rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.1);
+      background:var(--surface); color:var(--text); font-family:inherit;
+      cursor:pointer; text-align:left;
+    }
+    .shop button:hover:not(:disabled) { border-color:var(--accent); }
+    .shop button:disabled { opacity:0.45; cursor:not-allowed; }
+    .shop .name { font-weight:600; font-size:0.9rem; }
+    .shop .meta { font-size:0.75rem; color:var(--muted); }
+    .shop .cost { font-weight:700; color:var(--accent); font-size:0.85rem; }
+  </style>
+</head>
+<body>
+  <a href="./">← Games</a>
+  <h1>Fox Clicker</h1>
+  <div class="score" id="score">0</div>
+  <div class="rate" id="rate">0 / sec</div>
+  <div id="fox" title="Click me!">🦊</div>
+  <div class="shop" id="shop"></div>
+  <script>
+    const state = {
+      points: +(localStorage.getItem('fox_click_pts')||0),
+      power: +(localStorage.getItem('fox_click_pow')||1),
+      auto: +(localStorage.getItem('fox_click_auto')||0),
+      bought: JSON.parse(localStorage.getItem('fox_click_bought')||'{}')
+    };
+    const upgrades = [
+      { id:'paw', name:'Stronger Paw', desc:'+1 per click', base:25, type:'power', val:1 },
+      { id:'pack', name:'Fox Pack', desc:'+0.5 / sec', base:50, type:'auto', val:0.5 },
+      { id:'den', name:'Cozy Den', desc:'+2 / sec', base:200, type:'auto', val:2 },
+      { id:'rocket', name:'Rocket Fox', desc:'+5 per click', base:500, type:'power', val:5 },
+      { id:'empire', name:'Fox Empire', desc:'+15 / sec', base:2000, type:'auto', val:15 }
+    ];
+
+    const scoreEl = document.getElementById('score');
+    const rateEl = document.getElementById('rate');
+    const shop = document.getElementById('shop');
+
+    function save() {
+      localStorage.setItem('fox_click_pts', Math.floor(state.points));
+      localStorage.setItem('fox_click_pow', state.power);
+      localStorage.setItem('fox_click_auto', state.auto);
+      localStorage.setItem('fox_click_bought', JSON.stringify(state.bought));
+    }
+    function costOf(u) {
+      const n = state.bought[u.id] || 0;
+      return Math.floor(u.base * Math.pow(1.35, n));
+    }
+    function render() {
+      scoreEl.textContent = Math.floor(state.points).toLocaleString();
+      rateEl.textContent = state.auto.toFixed(1) + ' / sec · ' + state.power + ' per click';
+      shop.innerHTML = '';
+      upgrades.forEach(u => {
+        const n = state.bought[u.id] || 0;
+        const cost = costOf(u);
+        const btn = document.createElement('button');
+        btn.disabled = state.points < cost;
+        btn.innerHTML = '<div><div class="name">'+u.name+(n?' ×'+n:'')+'</div><div class="meta">'+u.desc+'</div></div><div class="cost">'+cost+'</div>';
+        btn.onclick = () => {
+          if (state.points < cost) return;
+          state.points -= cost;
+          state.bought[u.id] = n + 1;
+          if (u.type === 'power') state.power += u.val;
+          else state.auto += u.val;
+          save(); render();
+        };
+        shop.appendChild(btn);
+      });
+    }
+    document.getElementById('fox').addEventListener('click', () => {
+      state.points += state.power;
+      save(); render();
+    });
+    setInterval(() => {
+      if (state.auto > 0) {
+        state.points += state.auto / 10;
+        save(); render();
+      }
+    }, 100);
+    render();
+  </script>
+</body>
+</html>

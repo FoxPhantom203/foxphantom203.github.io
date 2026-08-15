@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games | FoxPhantom203</title>
+  <meta name="description" content="Open-source minigames by FoxPhantom203 — Snake, Memory, Reaction, Clicker.">
+  <link rel="canonical" href="https://foxphantom203.github.io/games/">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0f; --surface: rgba(22,22,30,0.92); --text: #e8e8ed;
+      --muted: #9a9aad; --accent: #ff6b35; --accent2: #fbbf24; --border: rgba(255,255,255,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif; color: var(--text);
+      min-height: 100dvh;
+      background: linear-gradient(145deg, rgba(11,11,15,0.92), rgba(25,12,35,0.8)),
+        url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
+      padding: 1.5rem;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 2rem; }
+    header a.back {
+      display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted);
+      text-decoration: none; font-size: 0.85rem; margin-bottom: 1rem;
+    }
+    header a.back:hover { color: var(--accent); }
+    h1 {
+      font-family: Orbitron, sans-serif; font-size: clamp(1.5rem, 4vw, 2rem);
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .sub { color: var(--muted); margin-top: 0.4rem; font-size: 0.95rem; }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 1.4rem; text-decoration: none; color: inherit;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .card:hover {
+      transform: translateY(-4px); border-color: rgba(255,107,53,0.45);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+    .card .icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(255,107,53,0.12); display: grid; place-items: center;
+      font-size: 1.5rem; margin-bottom: 0.25rem;
+    }
+    .card h2 { font-size: 1.05rem; font-weight: 700; }
+    .card p { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+    .badge {
+      display: inline-block; margin-top: auto; font-size: 0.68rem; font-weight: 600;
+      color: var(--accent); background: rgba(255,107,53,0.12);
+      padding: 0.2rem 0.55rem; border-radius: 999px; width: fit-content;
+    }
+    footer { text-align: center; margin-top: 2.5rem; color: var(--muted); font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="back" href="../">← Back to portfolio</a>
+      <h1>Fox Games</h1>
+      <p class="sub">Open-source minigames · pure HTML / CSS / JS · no tracking</p>
+    </header>
+    <div class="grid">
+      <a class="card" href="snake.html">
+        <div class="icon">🐍</div>
+        <h2>Snake</h2>
+        <p>Classic snake. Eat, grow, do not hit the walls.</p>
+        <span class="badge">Arcade</span>
+      </a>
+      <a class="card" href="memory.html">
+        <div class="icon">🧠</div>
+        <h2>Memory Match</h2>
+        <p>Flip cards and match pairs. Train your memory.</p>
+        <span class="badge">Puzzle</span>
+      </a>
+      <a class="card" href="reaction.html">
+        <div class="icon">⚡</div>
+        <h2>Reaction Test</h2>
+        <p>Wait for green, then click as fast as you can.</p>
+        <span class="badge">Speed</span>
+      </a>
+      <a class="card" href="clicker.html">
+        <div class="icon">🦊</div>
+        <h2>Fox Clicker</h2>
+        <p>Click the fox, unlock boosts, climb the score.</p>
+        <span class="badge">Idle</span>
+      </a>
+    </div>
+    <footer>MIT-style free to play · foxphantom203.github.io/games</footer>
+  </div>
+</body>
+</html>

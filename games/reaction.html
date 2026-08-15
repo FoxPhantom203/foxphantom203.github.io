@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reaction Test | Fox Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0b0f; --accent:#ff6b35; --text:#e8e8ed; --muted:#9a9aad; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--text);
+      min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; padding:1.25rem; gap:1rem;
+    }
+    a { color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    a:hover { color:var(--accent); }
+    h1 { font-family:Orbitron,sans-serif; font-size:1.3rem; color:var(--accent); }
+    #zone {
+      width:min(420px,92vw); height:280px; border-radius:1.25rem;
+      display:grid; place-items:center; cursor:pointer; user-select:none;
+      font-size:1.15rem; font-weight:600; text-align:center; padding:1.5rem;
+      transition:background 0.15s; border:1px solid rgba(255,255,255,0.08);
+    }
+    #zone.wait { background:#1a1a24; }
+    #zone.ready { background:#b45309; }
+    #zone.go { background:#15803d; }
+    #zone.early { background:#7f1d1d; }
+    .stats { color:var(--muted); font-size:0.9rem; text-align:center; }
+    .stats strong { color:var(--text); }
+  </style>
+</head>
+<body>
+  <a href="./">← Games</a>
+  <h1>Reaction Test</h1>
+  <div id="zone" class="wait">Click to start</div>
+  <p class="stats">Last: <strong id="last">—</strong> · Best: <strong id="best">—</strong></p>
+  <script>
+    const zone = document.getElementById('zone');
+    const lastEl = document.getElementById('last');
+    const bestEl = document.getElementById('best');
+    const bestKey = 'fox_reaction_best';
+    let best = +(localStorage.getItem(bestKey) || 0);
+    if (best) bestEl.textContent = best + ' ms';
+    let state = 'idle', timer, start;
+
+    function set(s, text, cls) {
+      state = s; zone.className = cls; zone.textContent = text;
+    }
+
+    zone.addEventListener('click', () => {
+      if (state === 'idle' || state === 'result' || state === 'early') {
+        clearTimeout(timer);
+        set('waiting', 'Wait for green…', 'ready');
+        timer = setTimeout(() => {
+          start = performance.now();
+          set('go', 'CLICK!', 'go');
+        }, 1200 + Math.random() * 2800);
+      } else if (state === 'waiting') {
+        clearTimeout(timer);
+        set('early', 'Too early! Click to try again', 'early');
+      } else if (state === 'go') {
+        const ms = Math.round(performance.now() - start);
+        lastEl.textContent = ms + ' ms';
+        if (!best || ms < best) {
+          best = ms;
+          localStorage.setItem(bestKey, best);
+          bestEl.textContent = best + ' ms';
+        }
+        set('result', ms + ' ms — click to retry', 'wait');
+      }
+    });
+  </script>
+</body>
+</html>

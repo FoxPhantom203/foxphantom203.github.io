@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoxPhantom203 | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #1a1a22;
+      --text: #e8e8ed;
+      --muted: #9a9aad;
+      --accent: #ff6b35;
+      --accent-soft: rgba(255, 107, 53, 0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: 1.25rem;
+      padding: 2.5rem 3rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.25rem;
+      border: 2px solid var(--accent);
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+    .links {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    a:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+    a.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text);
+    }
+    footer {
+      margin-top: 2.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">🦊</div>
+    <h1>FoxPhantom203</h1>
+    <p class="tagline">Creative fox · coding & building</p>
+    <p>Wassup! Making pages and shipping projects. Welcome to my little corner of the internet.</p>
+    <div class="links">
+      <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener">GitHub</a>
+      <a class="secondary" href="mailto:foxphantom203@tutamail.com">Email</a>
+    </div>
+  </div>
+  <footer>foxphantom203.github.io</footer>
+</body>
+</html>

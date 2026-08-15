@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Wayback
+Allow: /
+
+Sitemap: https://foxphantom203.github.io/sitemap.xml

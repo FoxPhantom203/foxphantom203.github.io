@@ -3,496 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="FoxPhantom203 — Creative fox. Coding, building, and Fox AI. Personal portfolio.">
-  <meta name="keywords" content="FoxPhantom203, portfolio, Fox AI, developer, creative">
+  <meta name="description" content="FoxPhantom203 — Creative fox. Open-source Fox AI, games, and portfolio.">
   <meta name="author" content="FoxPhantom203">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0f0f12">
   <link rel="canonical" href="https://foxphantom203.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://foxphantom203.github.io/">
   <meta property="og:title" content="FoxPhantom203 | Portfolio">
-  <meta property="og:description" content="Creative fox · coding & building. Chat with Fox AI.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="Open-source Fox AI chatbot, minigames, and creative builds.">
+  <meta property="og:url" content="https://foxphantom203.github.io/">
   <title>FoxPhantom203 | Portfolio</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
   <style>
     :root {
-      --bg: #0b0b0f;
-      --surface: rgba(22, 22, 30, 0.92);
-      --surface-2: rgba(30, 30, 42, 0.95);
-      --text: #e8e8ed;
-      --muted: #9a9aad;
-      --accent: #ff6b35;
-      --accent-2: #fbbf24;
-      --border: rgba(255,255,255,0.1);
-      --radius: 1.25rem;
+      --bg:#0b0b0f; --surface:rgba(22,22,30,0.92); --surface-2:rgba(30,30,42,0.95);
+      --text:#e8e8ed; --muted:#9a9aad; --accent:#ff6b35; --accent-2:#fbbf24;
+      --border:rgba(255,255,255,0.1); --radius:1.25rem;
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      height: 100%;
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
-      background-image:
-        linear-gradient(145deg, rgba(11,11,15,0.9) 0%, rgba(25,12,35,0.78) 45%, rgba(11,11,15,0.92) 100%),
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{height:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,sans-serif;background-color:var(--bg);
+      background-image:linear-gradient(145deg,rgba(11,11,15,0.9),rgba(25,12,35,0.78) 45%,rgba(11,11,15,0.92)),
         url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80");
-      background-size: cover;
-      background-position: center center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: var(--text);
-      min-height: 100%;
-      min-height: 100dvh;
-      width: 100%;
-      line-height: 1.55;
-      overflow-x: hidden;
+      background-size:cover;background-position:center;background-attachment:fixed;
+      color:var(--text);min-height:100dvh;width:100%;line-height:1.55;overflow-x:hidden;
     }
+    .page{
+      position:relative;z-index:1;width:100%;max-width:1100px;margin:0 auto;
+      padding:clamp(1.25rem,3vw,2.5rem);min-height:100dvh;
+      display:grid;grid-template-columns:1fr;gap:1.5rem;align-content:center;
+    }
+    @media(min-width:900px){
+      .page{grid-template-columns:minmax(280px,380px) minmax(360px,1fr);align-items:stretch;gap:1.75rem}
+    }
+    .orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:0.3;pointer-events:none;z-index:0;animation:float 14s ease-in-out infinite}
+    .orb-1{width:340px;height:340px;background:#ff6b35;top:-100px;left:-80px}
+    .orb-2{width:300px;height:300px;background:#7c3aed;bottom:-60px;right:-50px;animation-delay:-5s}
+    .orb-3{width:200px;height:200px;background:#06b6d4;top:45%;left:8%;animation-delay:-8s}
+    @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-18px) scale(1.06)}}
 
-    /* Layout shell – works on all desktop widths */
-    .page {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: clamp(1.25rem, 3vw, 2.5rem);
-      min-height: 100dvh;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      align-content: center;
+    .profile{
+      background:var(--surface);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--border);border-radius:var(--radius);padding:2rem 1.75rem;
+      text-align:center;box-shadow:0 20px 50px rgba(0,0,0,0.45);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
     }
+    .avatar-wrap{
+      width:96px;height:96px;border-radius:50%;border:2px solid var(--accent);
+      background:rgba(255,107,53,0.12);display:grid;place-items:center;margin-bottom:1.1rem;
+      box-shadow:0 0 28px rgba(255,107,53,0.35);animation:pulse-glow 3s ease-in-out infinite;
+      cursor:pointer;transition:transform 0.2s;
+    }
+    .avatar-wrap:hover{transform:scale(1.05)}
+    .avatar-wrap svg{width:56px;height:56px}
+    @keyframes pulse-glow{0%,100%{box-shadow:0 0 18px rgba(255,107,53,0.3)}50%{box-shadow:0 0 34px rgba(255,107,53,0.55)}}
+    .deco-row{display:flex;gap:0.6rem;margin-bottom:0.85rem;opacity:0.85}
+    .deco-row svg{width:18px;height:18px}
+    h1{
+      font-family:Orbitron,sans-serif;font-size:clamp(1.35rem,2.5vw,1.7rem);font-weight:700;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem;
+    }
+    .tagline{color:var(--muted);font-size:0.92rem;margin-bottom:1rem}
+    .bio{color:var(--muted);font-size:0.9rem;margin-bottom:1.35rem;max-width:28ch}
+    .links{display:flex;flex-wrap:wrap;gap:0.65rem;justify-content:center;width:100%}
+    .links a{
+      display:inline-flex;align-items:center;gap:0.45rem;padding:0.55rem 1.15rem;border-radius:999px;
+      font-weight:600;font-size:0.88rem;text-decoration:none;color:#fff;background:var(--accent);
+      box-shadow:0 4px 14px rgba(255,107,53,0.35);transition:transform 0.15s,box-shadow 0.15s;min-height:42px;
+    }
+    .links a svg{width:16px;height:16px;flex-shrink:0}
+    .links a:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,107,53,0.5)}
+    .links a.secondary{background:transparent;border:1px solid var(--border);color:var(--text);box-shadow:none}
+    .links a.secondary:hover{border-color:var(--accent);color:var(--accent)}
+    .oss{
+      margin-top:1rem;font-size:0.72rem;color:var(--muted);line-height:1.4;
+      padding:0.55rem 0.75rem;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+    }
+    .oss a{color:var(--accent-2);text-decoration:none}
+    .oss a:hover{text-decoration:underline}
+    .clock{margin-top:0.9rem;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
 
-    @media (min-width: 900px) {
-      .page {
-        grid-template-columns: minmax(280px, 380px) minmax(360px, 1fr);
-        align-items: stretch;
-        gap: 1.75rem;
-      }
+    .ai-panel{
+      background:var(--surface);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,0.45);
+      display:flex;flex-direction:column;min-height:440px;max-height:min(680px,82dvh);overflow:hidden;
     }
+    .ai-header{
+      display:flex;align-items:center;gap:0.75rem;padding:0.9rem 1.15rem;
+      border-bottom:1px solid var(--border);background:rgba(255,107,53,0.06);flex-shrink:0;
+    }
+    .ai-header-icon{
+      width:40px;height:40px;border-radius:12px;background:rgba(255,107,53,0.15);
+      border:1px solid rgba(255,107,53,0.35);display:grid;place-items:center;
+    }
+    .ai-header-icon svg{width:24px;height:24px}
+    .ai-header h2{font-family:Orbitron,sans-serif;font-size:1rem;font-weight:600}
+    .ai-header p{font-size:0.72rem;color:var(--muted)}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;margin-left:auto;flex-shrink:0}
+    .status-dot.busy{background:#fbbf24;box-shadow:0 0 8px #fbbf24;animation:blink 1s infinite}
+    @keyframes blink{50%{opacity:0.4}}
 
-    /* Decor */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.3;
-      pointer-events: none;
-      z-index: 0;
-      animation: float 14s ease-in-out infinite;
+    .toolbar{
+      display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;
+      border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;
     }
-    .orb-1 { width: 340px; height: 340px; background: #ff6b35; top: -100px; left: -80px; }
-    .orb-2 { width: 300px; height: 300px; background: #7c3aed; bottom: -60px; right: -50px; animation-delay: -5s; }
-    .orb-3 { width: 200px; height: 200px; background: #06b6d4; top: 45%; left: 8%; animation-delay: -8s; }
-    @keyframes float {
-      0%, 100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(20px,-18px) scale(1.06); }
+    .toolbar label{font-size:0.72rem;color:var(--muted)}
+    .toolbar select{
+      background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;
+      color:var(--text);font-size:0.75rem;padding:0.3rem 0.5rem;font-family:inherit;outline:none;
     }
+    .toolbar select:focus{border-color:rgba(255,107,53,0.5)}
+    .toolbar .clear{
+      margin-left:auto;font-size:0.72rem;background:none;border:1px solid var(--border);
+      color:var(--muted);border-radius:8px;padding:0.3rem 0.6rem;cursor:pointer;font-family:inherit;
+    }
+    .toolbar .clear:hover{color:var(--accent);border-color:var(--accent)}
 
-    /* Profile card */
-    .profile {
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+    .chat{flex:1;overflow-y:auto;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:0.85rem;scroll-behavior:smooth}
+    .chat::-webkit-scrollbar{width:6px}
+    .chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:99px}
+    .msg{max-width:92%;padding:0.7rem 0.95rem;border-radius:1rem;font-size:0.9rem;line-height:1.5;animation:msgIn 0.25s ease}
+    @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .msg.bot{align-self:flex-start;background:var(--surface-2);border:1px solid var(--border);border-bottom-left-radius:0.3rem}
+    .msg.user{align-self:flex-end;background:linear-gradient(135deg,#ff6b35,#e85d04);color:#fff;border-bottom-right-radius:0.3rem}
+    .msg .label{display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;font-weight:600;margin-bottom:0.3rem;opacity:0.85}
+    .msg .label svg{width:14px;height:14px}
+    .msg.bot .label{color:var(--accent-2)}
+    .msg .body{white-space:pre-wrap;word-break:break-word}
+    .msg .cursor{display:inline-block;width:2px;height:1em;background:var(--accent-2);margin-left:1px;vertical-align:text-bottom;animation:blink 0.8s infinite}
+    .typing{display:inline-flex;gap:4px;padding:0.2rem 0}
+    .typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bounce 1.2s infinite ease-in-out}
+    .typing span:nth-child(2){animation-delay:0.15s}
+    .typing span:nth-child(3){animation-delay:0.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:0.4}40%{transform:translateY(-5px);opacity:1}}
 
-    .avatar-wrap {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      background: rgba(255,107,53,0.12);
-      display: grid;
-      place-items: center;
-      margin-bottom: 1.1rem;
-      box-shadow: 0 0 28px rgba(255,107,53,0.35);
-      animation: pulse-glow 3s ease-in-out infinite;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .suggestions{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0 1.15rem 0.65rem;flex-shrink:0}
+    .suggestions button{
+      font-size:0.72rem;padding:0.35rem 0.7rem;border-radius:999px;border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-family:inherit;
+      transition:border-color 0.15s,color 0.15s,background 0.15s;
     }
-    .avatar-wrap:hover { transform: scale(1.05); }
-    .avatar-wrap:active { transform: scale(0.95); }
-    .avatar-wrap svg { width: 56px; height: 56px; }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 18px rgba(255,107,53,0.3); }
-      50% { box-shadow: 0 0 34px rgba(255,107,53,0.55); }
-    }
+    .suggestions button:hover{border-color:var(--accent);color:var(--accent);background:rgba(255,107,53,0.08)}
 
-    .deco-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 0.85rem;
-      opacity: 0.85;
+    .composer{display:flex;gap:0.55rem;padding:0.85rem 1.1rem;border-top:1px solid var(--border);background:rgba(0,0,0,0.2);flex-shrink:0}
+    .composer input{
+      flex:1;min-width:0;background:rgba(255,255,255,0.06);border:1px solid var(--border);
+      border-radius:999px;padding:0.65rem 1.1rem;color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;
     }
-    .deco-row svg { width: 18px; height: 18px; }
+    .composer input::placeholder{color:var(--muted)}
+    .composer input:focus{border-color:rgba(255,107,53,0.5);box-shadow:0 0 0 3px rgba(255,107,53,0.15)}
+    .composer button{
+      width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;
+      cursor:pointer;display:grid;place-items:center;flex-shrink:0;
+      transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 12px rgba(255,107,53,0.35);
+    }
+    .composer button svg{width:18px;height:18px}
+    .composer button:hover{transform:scale(1.06)}
+    .composer button:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 
-    h1 {
-      font-family: "Orbitron", sans-serif;
-      font-size: clamp(1.35rem, 2.5vw, 1.7rem);
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.3rem;
+    footer{grid-column:1/-1;text-align:center;color:var(--muted);font-size:0.78rem;padding-top:0.25rem}
+    footer a{color:var(--accent-2);text-decoration:none}
+    #particles{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+    .toast{
+      position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
+      background:rgba(22,22,30,0.96);color:#fff;padding:0.6rem 1.2rem;border-radius:999px;
+      font-size:0.85rem;border:1px solid rgba(255,107,53,0.4);z-index:100;opacity:0;
+      pointer-events:none;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;white-space:nowrap;
     }
-
-    .tagline { color: var(--muted); font-size: 0.92rem; margin-bottom: 1rem; }
-    .bio { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.35rem; max-width: 28ch; }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.65rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.55rem 1.15rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.88rem;
-      text-decoration: none;
-      color: #fff;
-      background: var(--accent);
-      box-shadow: 0 4px 14px rgba(255,107,53,0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      min-height: 42px;
-    }
-    .links a svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .links a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255,107,53,0.5);
-    }
-    .links a.secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      box-shadow: none;
-    }
-    .links a.secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .clock {
-      margin-top: 1.1rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Fox AI panel */
-    .ai-panel {
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      display: flex;
-      flex-direction: column;
-      min-height: 420px;
-      max-height: min(640px, 80dvh);
-      overflow: hidden;
-    }
-
-    .ai-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 1.15rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,107,53,0.06);
-      flex-shrink: 0;
-    }
-    .ai-header-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: rgba(255,107,53,0.15);
-      border: 1px solid rgba(255,107,53,0.35);
-      display: grid;
-      place-items: center;
-    }
-    .ai-header-icon svg { width: 24px; height: 24px; }
-    .ai-header h2 {
-      font-family: "Orbitron", sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .ai-header p {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 8px #22c55e;
-      margin-left: auto;
-      flex-shrink: 0;
-    }
-
-    .chat {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem 1.15rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      scroll-behavior: smooth;
-    }
-    .chat::-webkit-scrollbar { width: 6px; }
-    .chat::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.15);
-      border-radius: 99px;
-    }
-
-    .msg {
-      max-width: 92%;
-      padding: 0.7rem 0.95rem;
-      border-radius: 1rem;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      animation: msgIn 0.3s ease;
-    }
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .msg.bot {
-      align-self: flex-start;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 0.3rem;
-    }
-    .msg.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #ff6b35, #e85d04);
-      color: #fff;
-      border-bottom-right-radius: 0.3rem;
-    }
-    .msg .label {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-      opacity: 0.8;
-    }
-    .msg .label svg { width: 14px; height: 14px; }
-    .msg.bot .label { color: var(--accent-2); }
-    .msg.user .label { color: rgba(255,255,255,0.9); }
-
-    .typing {
-      display: inline-flex;
-      gap: 4px;
-      padding: 0.2rem 0;
-    }
-    .typing span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--muted);
-      animation: bounce 1.2s infinite ease-in-out;
-    }
-    .typing span:nth-child(2) { animation-delay: 0.15s; }
-    .typing span:nth-child(3) { animation-delay: 0.3s; }
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    .composer {
-      display: flex;
-      gap: 0.55rem;
-      padding: 0.9rem 1.1rem;
-      border-top: 1px solid var(--border);
-      background: rgba(0,0,0,0.2);
-      flex-shrink: 0;
-    }
-    .composer input {
-      flex: 1;
-      min-width: 0;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.65rem 1.1rem;
-      color: var(--text);
-      font-size: 0.9rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-    .composer input::placeholder { color: var(--muted); }
-    .composer input:focus {
-      border-color: rgba(255,107,53,0.5);
-      box-shadow: 0 0 0 3px rgba(255,107,53,0.15);
-    }
-    .composer button {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 0 4px 12px rgba(255,107,53,0.35);
-    }
-    .composer button svg { width: 18px; height: 18px; }
-    .composer button:hover {
-      transform: scale(1.06);
-      box-shadow: 0 6px 16px rgba(255,107,53,0.5);
-    }
-    .composer button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .suggestions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      padding: 0 1.15rem 0.75rem;
-      flex-shrink: 0;
-    }
-    .suggestions button {
-      font-size: 0.72rem;
-      padding: 0.35rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      cursor: pointer;
-      font-family: inherit;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-    }
-    .suggestions button:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(255,107,53,0.08);
-    }
-
-    footer {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.78rem;
-      padding-top: 0.25rem;
-    }
-
-    #particles {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 50;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: rgba(22,22,30,0.96);
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      border: 1px solid rgba(255,107,53,0.4);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
-      white-space: nowrap;
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .orb, .avatar-wrap { animation: none !important; }
-      .msg { animation: none; }
-    }
-
-    @media (max-width: 480px) {
-      .ai-panel { min-height: 360px; max-height: 70dvh; }
-      .profile { padding: 1.5rem 1.25rem; }
-    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    @media(prefers-reduced-motion:reduce){.orb,.avatar-wrap{animation:none!important}.msg{animation:none}}
+    @media(max-width:480px){.ai-panel{min-height:360px;max-height:70dvh}.profile{padding:1.5rem 1.25rem}}
   </style>
 </head>
 <body>
-  <!-- SVG sprite -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="icon-fox" viewBox="0 0 64 64">
       <ellipse cx="32" cy="38" rx="18" ry="16" fill="#ff6b35"/>
-      <path d="M14 22 L8 6 L22 16 Z" fill="#ff6b35"/>
-      <path d="M50 22 L56 6 L42 16 Z" fill="#ff6b35"/>
-      <path d="M14 22 L8 6 L18 14 Z" fill="#c2410c"/>
-      <path d="M50 22 L56 6 L46 14 Z" fill="#c2410c"/>
+      <path d="M14 22 L8 6 L22 16 Z" fill="#ff6b35"/><path d="M50 22 L56 6 L42 16 Z" fill="#ff6b35"/>
+      <path d="M14 22 L8 6 L18 14 Z" fill="#c2410c"/><path d="M50 22 L56 6 L46 14 Z" fill="#c2410c"/>
       <ellipse cx="32" cy="40" rx="10" ry="9" fill="#fff7ed"/>
-      <circle cx="24" cy="34" r="3.2" fill="#1c1917"/>
-      <circle cx="40" cy="34" r="3.2" fill="#1c1917"/>
-      <circle cx="24.8" cy="33.2" r="1.1" fill="#fff"/>
-      <circle cx="40.8" cy="33.2" r="1.1" fill="#fff"/>
+      <circle cx="24" cy="34" r="3.2" fill="#1c1917"/><circle cx="40" cy="34" r="3.2" fill="#1c1917"/>
+      <circle cx="24.8" cy="33.2" r="1.1" fill="#fff"/><circle cx="40.8" cy="33.2" r="1.1" fill="#fff"/>
       <ellipse cx="32" cy="40" rx="2.2" ry="1.6" fill="#1c1917"/>
       <path d="M28 44 Q32 48 36 44" fill="none" stroke="#1c1917" stroke-width="1.5" stroke-linecap="round"/>
     </symbol>
-    <symbol id="icon-spark" viewBox="0 0 24 24">
-      <path fill="#fbbf24" d="M12 1.5l1.8 6.2L20 9.5l-6.2 1.8L12 17.5l-1.8-6.2L4 9.5l6.2-1.8z"/>
-    </symbol>
-    <symbol id="icon-github" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0112 6.84c.85.004 1.71.12 2.51.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/>
-    </symbol>
-    <symbol id="icon-mail" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-    </symbol>
-    <symbol id="icon-send" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-    </symbol>
-    <symbol id="icon-bot" viewBox="0 0 24 24">
-      <path fill="#fbbf24" d="M12 2a2 2 0 012 2v1h3a3 3 0 013 3v8a3 3 0 01-3 3H7a3 3 0 01-3-3V8a3 3 0 013-3h3V4a2 2 0 012-2zm-3 9a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
-    </symbol>
-    <symbol id="icon-user" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-    </symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 1.5l1.8 6.2L20 9.5l-6.2 1.8L12 17.5l-1.8-6.2L4 9.5l6.2-1.8z"/></symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0112 6.84c.85.004 1.71.12 2.51.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.59.69.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></symbol>
+    <symbol id="icon-game" viewBox="0 0 24 24"><path fill="currentColor" d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5S14.67 12 15.5 12s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
   </svg>
 
   <div class="orb orb-1" aria-hidden="true"></div>
@@ -501,41 +204,50 @@
   <canvas id="particles" aria-hidden="true"></canvas>
 
   <div class="page">
-    <!-- Profile -->
-    <aside class="profile animate__animated animate__fadeInLeft">
+    <aside class="profile">
       <div class="deco-row" aria-hidden="true">
         <svg><use href="#icon-spark"/></svg>
         <svg><use href="#icon-fox"/></svg>
         <svg><use href="#icon-spark"/></svg>
       </div>
-      <div class="avatar-wrap" id="avatar" title="Click the fox!" role="button" tabindex="0" aria-label="Fox avatar">
+      <div class="avatar-wrap" id="avatar" role="button" tabindex="0" aria-label="Fox avatar">
         <svg><use href="#icon-fox"/></svg>
       </div>
       <h1>FoxPhantom203</h1>
       <p class="tagline">Creative fox · coding & building</p>
       <p class="bio">Wassup! Making pages and shipping projects. Welcome to my corner of the internet.</p>
       <div class="links">
-        <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer">
-          <svg><use href="#icon-github"/></svg> GitHub
-        </a>
-        <a class="secondary" href="mailto:foxphantom203@tutamail.com">
-          <svg><use href="#icon-mail"/></svg> Email
-        </a>
+        <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer"><svg><use href="#icon-github"/></svg> GitHub</a>
+        <a class="secondary" href="games/"><svg><use href="#icon-game"/></svg> Games</a>
+        <a class="secondary" href="mailto:foxphantom203@tutamail.com"><svg><use href="#icon-mail"/></svg> Email</a>
       </div>
+      <p class="oss">
+        Fox AI is <strong>open source</strong> on this site — free public models via
+        <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations</a>,
+        local fallback brain, no API keys stored. Fork the
+        <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" target="_blank" rel="noopener">repo</a>.
+      </p>
       <div class="clock" id="clock" aria-live="polite"></div>
     </aside>
 
-    <!-- Fox AI -->
-    <section class="ai-panel animate__animated animate__fadeInRight" aria-label="Fox AI chatbot">
+    <section class="ai-panel" aria-label="Fox AI chatbot">
       <div class="ai-header">
-        <div class="ai-header-icon">
-          <svg><use href="#icon-fox"/></svg>
-        </div>
+        <div class="ai-header-icon"><svg><use href="#icon-fox"/></svg></div>
         <div>
           <h2>Fox AI</h2>
-          <p>Ask me anything — type a prompt below</p>
+          <p>Open-source · type a prompt</p>
         </div>
-        <div class="status-dot" title="Online" aria-hidden="true"></div>
+        <div class="status-dot" id="status" title="Ready"></div>
+      </div>
+
+      <div class="toolbar">
+        <label for="model">Model</label>
+        <select id="model" aria-label="AI model">
+          <option value="openai">Online · OpenAI-compat</option>
+          <option value="mistral">Online · Mistral</option>
+          <option value="local">Local fallback only</option>
+        </select>
+        <button type="button" class="clear" id="clearChat">Clear chat</button>
       </div>
 
       <div class="chat" id="chat" role="log" aria-live="polite"></div>
@@ -543,209 +255,205 @@
       <div class="suggestions" id="suggestions">
         <button type="button" data-q="Who is FoxPhantom203?">Who is FoxPhantom203?</button>
         <button type="button" data-q="Tell me a fun fox fact">Fox fact</button>
-        <button type="button" data-q="Help me brainstorm a project idea">Project idea</button>
-        <button type="button" data-q="Write a short motivational message">Motivate me</button>
+        <button type="button" data-q="Suggest a weekend coding project">Project idea</button>
+        <button type="button" data-q="What games are on this site?">Games?</button>
+        <button type="button" data-q="Explain how Fox AI works">How Fox AI works</button>
       </div>
 
       <form class="composer" id="composer">
-        <input type="text" id="prompt" placeholder="Prompt Fox AI…" autocomplete="off" maxlength="500" aria-label="Your prompt">
-        <button type="submit" id="sendBtn" aria-label="Send">
-          <svg><use href="#icon-send"/></svg>
-        </button>
+        <input type="text" id="prompt" placeholder="Prompt Fox AI…" autocomplete="off" maxlength="600" aria-label="Your prompt">
+        <button type="submit" id="sendBtn" aria-label="Send"><svg><use href="#icon-send"/></svg></button>
       </form>
     </section>
 
-    <footer>foxphantom203.github.io · Fox AI</footer>
+    <footer>
+      <a href="games/">Games</a> ·
+      <a href="https://github.com/FoxPhantom203/foxphantom203.github.io">Source</a> ·
+      foxphantom203.github.io
+    </footer>
   </div>
 
   <div class="toast" id="toast" role="status"></div>
 
   <script>
-    (function () {
-      const chat = document.getElementById('chat');
-      const form = document.getElementById('composer');
-      const input = document.getElementById('prompt');
-      const sendBtn = document.getElementById('sendBtn');
-      const clock = document.getElementById('clock');
-      const toast = document.getElementById('toast');
-      const avatar = document.getElementById('avatar');
-      const canvas = document.getElementById('particles');
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      let busy = false;
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){
+    const chat=document.getElementById('chat');
+    const form=document.getElementById('composer');
+    const input=document.getElementById('prompt');
+    const sendBtn=document.getElementById('sendBtn');
+    const modelSel=document.getElementById('model');
+    const status=document.getElementById('status');
+    const clock=document.getElementById('clock');
+    const toast=document.getElementById('toast');
+    const avatar=document.getElementById('avatar');
+    const canvas=document.getElementById('particles');
+    const ctx=canvas.getContext('2d');
+    let particles=[],busy=false;
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      const SYSTEM = `You are Fox AI, a friendly, witty assistant on FoxPhantom203's portfolio site. FoxPhantom203 is a creative developer who codes, builds projects, and makes web pages. Keep replies concise (2-5 sentences), helpful, and a bit playful with fox energy. Do not use emoji characters — describe things in words only. If asked who you are, say you are Fox AI on this portfolio.`;
+    const SYSTEM='You are Fox AI, a friendly open-source assistant on FoxPhantom203 portfolio. FoxPhantom203 codes, builds, and ships pages. Site has minigames at /games/ (Snake, Memory, Reaction, Fox Clicker). Keep replies concise (2-6 sentences), helpful, playful fox energy. No emoji characters. If asked how you work: you use free public LLM endpoints (Pollinations) with a local rule-based fallback, all client-side, no stored API keys.';
 
-      // SVG label helpers
-      function botLabel() {
-        return '<span class="label"><svg><use href="#icon-fox"/></svg> Fox AI</span>';
+    function botLabel(){return '<span class="label"><svg><use href="#icon-fox"/></svg> Fox AI</span>'}
+    function userLabel(){return '<span class="label"><svg><use href="#icon-user"/></svg> You</span>'}
+
+    function addMsg(text,role,stream){
+      const div=document.createElement('div');
+      div.className='msg '+role;
+      div.innerHTML=(role==='bot'?botLabel():userLabel())+'<div class="body"></div>';
+      const body=div.querySelector('.body');
+      chat.appendChild(div);
+      chat.scrollTop=chat.scrollHeight;
+      if(stream&&role==='bot'&&!reduceMotion){
+        return typewrite(body,text);
       }
-      function userLabel() {
-        return '<span class="label"><svg><use href="#icon-user"/></svg> You</span>';
-      }
+      body.textContent=text;
+      return Promise.resolve();
+    }
 
-      function addMsg(text, role) {
-        const div = document.createElement('div');
-        div.className = 'msg ' + role;
-        div.innerHTML = (role === 'bot' ? botLabel() : userLabel()) +
-          '<div class="body"></div>';
-        div.querySelector('.body').textContent = text;
-        chat.appendChild(div);
-        chat.scrollTop = chat.scrollHeight;
-        return div;
-      }
-
-      function addTyping() {
-        const div = document.createElement('div');
-        div.className = 'msg bot';
-        div.id = 'typing';
-        div.innerHTML = botLabel() + '<div class="typing"><span></span><span></span><span></span></div>';
-        chat.appendChild(div);
-        chat.scrollTop = chat.scrollHeight;
-        return div;
-      }
-
-      // Local fallback brain
-      function localReply(q) {
-        const t = q.toLowerCase();
-        if (/who (are you|is fox)|what (are you|is fox ai)/.test(t))
-          return 'I am Fox AI — the little brain living on FoxPhantom203\'s portfolio. Ask me anything: ideas, facts, code tips, or just say hello.';
-        if (/foxphantom|who is (he|the owner|this)/.test(t))
-          return 'FoxPhantom203 is a creative fox who codes, builds, and ships web pages. This site is the portfolio home base.';
-        if (/hello|hi\b|hey|wassup|yo\b/.test(t))
-          return 'Hey there! Fox AI at your service. What would you like to explore today?';
-        if (/fact|fun/.test(t))
-          return 'Fox fact: red foxes can hear a mouse squeak from about 100 feet away under two feet of snow. Stealthy little hunters.';
-        if (/project|idea|brainstorm/.test(t))
-          return 'Try building a tiny tools site: a color palette generator, a markdown previewer, or a pixel-art editor. Ship small, ship often.';
-        if (/motivat|inspire|encourage/.test(t))
-          return 'Every expert was once a beginner who refused to quit. Open the editor, write one more line, and keep the streak alive.';
-        if (/code|program|javascript|html|css/.test(t))
-          return 'Start simple: one HTML file, a bit of CSS, and a sprinkle of JS. Master the basics, then layer frameworks when you need them.';
-        if (/thank/.test(t))
-          return 'Anytime! The fox den is always open. Come back whenever you need a nudge.';
-        return 'Interesting prompt! I am thinking in fox-mode. Try asking about this portfolio, a project idea, a fun fact, or anything you are building.';
-      }
-
-      async function askModel(prompt) {
-        // Free public text model via Pollinations (no API key)
-        const full = SYSTEM + '\n\nUser: ' + prompt + '\n\nFox AI:';
-        const url = 'https://text.pollinations.ai/' + encodeURIComponent(full) + '?model=openai&system=' + encodeURIComponent('Be concise.') + '&seed=' + Date.now();
-        const ctrl = new AbortController();
-        const timer = setTimeout(() => ctrl.abort(), 12000);
-        try {
-          const res = await fetch(url, { signal: ctrl.signal });
-          clearTimeout(timer);
-          if (!res.ok) throw new Error('bad status');
-          let text = (await res.text()).trim();
-          // Clean common artifacts
-          text = text.replace(/^Fox AI:\s*/i, '').trim();
-          if (!text || text.length < 3) throw new Error('empty');
-          return text.slice(0, 800);
-        } catch (e) {
-          clearTimeout(timer);
-          return localReply(prompt);
-        }
-      }
-
-      async function handlePrompt(raw) {
-        const prompt = (raw || '').trim();
-        if (!prompt || busy) return;
-        busy = true;
-        sendBtn.disabled = true;
-        addMsg(prompt, 'user');
-        input.value = '';
-        const typing = addTyping();
-
-        const reply = await askModel(prompt);
-        typing.remove();
-        addMsg(reply, 'bot');
-        busy = false;
-        sendBtn.disabled = false;
-        input.focus();
-      }
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        handlePrompt(input.value);
+    function typewrite(el,text){
+      return new Promise(resolve=>{
+        let i=0;
+        const cursor=document.createElement('span');
+        cursor.className='cursor';
+        el.textContent='';
+        el.appendChild(cursor);
+        const step=()=>{
+          if(i<text.length){
+            el.insertBefore(document.createTextNode(text[i]),cursor);
+            i++;
+            chat.scrollTop=chat.scrollHeight;
+            setTimeout(step,8+Math.random()*12);
+          } else {
+            cursor.remove();
+            resolve();
+          }
+        };
+        step();
       });
+    }
 
-      document.getElementById('suggestions').addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-q]');
-        if (btn) handlePrompt(btn.getAttribute('data-q'));
-      });
+    function addTyping(){
+      const div=document.createElement('div');
+      div.className='msg bot';div.id='typing';
+      div.innerHTML=botLabel()+'<div class="typing"><span></span><span></span><span></span></div>';
+      chat.appendChild(div);chat.scrollTop=chat.scrollHeight;
+      return div;
+    }
 
-      // Welcome message
-      addMsg('Hello! I am Fox AI. Type a prompt below and I will answer. What is on your mind?', 'bot');
+    function localReply(q){
+      const t=q.toLowerCase();
+      if(/how (do you|does fox|fox ai) work|open.?source|model/.test(t))
+        return 'Fox AI runs fully in your browser. It calls free public text models on Pollinations (no API key on this site). If the network fails, a local rule-based brain answers instead. Source is on GitHub — fork and improve it.';
+      if(/game/.test(t))
+        return 'This site has open minigames at /games/: Snake, Memory Match, Reaction Test, and Fox Clicker. Pure HTML, CSS, and JS — no installs.';
+      if(/who (are you|is fox)|what (are you|is fox ai)/.test(t))
+        return 'I am Fox AI — open-source assistant on FoxPhantom203\'s portfolio. Ask about projects, games, coding tips, or anything else.';
+      if(/foxphantom|who is (he|the owner|this)/.test(t))
+        return 'FoxPhantom203 is a creative developer who codes, builds, and ships web pages. This site is the home base.';
+      if(/hello|hi\b|hey|wassup|yo\b/.test(t))
+        return 'Hey! Fox AI online. Prompt me about games, code, ideas, or how this stack works.';
+      if(/fact|fun/.test(t))
+        return 'Fox fact: red foxes can hear a mouse under two feet of snow from about a hundred feet away.';
+      if(/project|idea|brainstorm/.test(t))
+        return 'Weekend idea: a tiny static tools site — palette generator, markdown preview, or a pixel editor. Ship one feature and publish it.';
+      if(/motivat|inspire/.test(t))
+        return 'Every expert was once a beginner who kept going. Open the editor and write one more useful line.';
+      if(/thank/.test(t))
+        return 'Anytime. The den stays open.';
+      return 'Got your prompt. Try asking how Fox AI works, what games exist here, or for a project idea. Online models give richer answers when available.';
+    }
 
-      // Clock
-      function updateClock() {
-        clock.textContent = new Date().toLocaleString(undefined, {
-          weekday: 'short', month: 'short', day: 'numeric',
-          hour: '2-digit', minute: '2-digit', second: '2-digit'
-        });
+    async function askOnline(prompt,model){
+      const full=SYSTEM+'\n\nUser: '+prompt+'\n\nFox AI:';
+      const url='https://text.pollinations.ai/'+encodeURIComponent(full)+
+        '?model='+encodeURIComponent(model)+'&seed='+Date.now();
+      const ctrl=new AbortController();
+      const timer=setTimeout(()=>ctrl.abort(),14000);
+      try{
+        const res=await fetch(url,{signal:ctrl.signal});
+        clearTimeout(timer);
+        if(!res.ok) throw new Error('status');
+        let text=(await res.text()).trim().replace(/^Fox AI:\s*/i,'').trim();
+        if(!text||text.length<3) throw new Error('empty');
+        return text.slice(0,1200);
+      }catch(e){
+        clearTimeout(timer);
+        throw e;
       }
-      updateClock();
-      setInterval(updateClock, 1000);
+    }
 
-      // Particles
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    async function askModel(prompt){
+      const mode=modelSel.value;
+      if(mode==='local') return localReply(prompt);
+      try{
+        return await askOnline(prompt, mode==='mistral'?'mistral':'openai');
+      }catch(e){
+        return localReply(prompt)+' (online model timed out — local answer)';
       }
-      resize();
-      window.addEventListener('resize', resize);
+    }
 
-      function burst(x, y, count) {
-        if (reduceMotion) return;
-        for (let i = 0; i < count; i++) {
-          const a = (Math.PI * 2 * i) / count + Math.random() * 0.3;
-          const s = 2 + Math.random() * 4;
-          particles.push({
-            x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s,
-            life: 1, size: 2 + Math.random() * 3,
-            color: Math.random() > 0.5 ? '#ff6b35' : '#fbbf24'
-          });
-        }
-      }
-      function tick() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles = particles.filter(p => p.life > 0);
-        for (const p of particles) {
-          p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.life -= 0.02;
-          ctx.globalAlpha = Math.max(0, p.life);
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.globalAlpha = 1;
-        requestAnimationFrame(tick);
-      }
-      if (!reduceMotion) requestAnimationFrame(tick);
+    async function handlePrompt(raw){
+      const prompt=(raw||'').trim();
+      if(!prompt||busy) return;
+      busy=true;sendBtn.disabled=true;status.classList.add('busy');status.title='Thinking…';
+      await addMsg(prompt,'user');
+      input.value='';
+      const typing=addTyping();
+      const reply=await askModel(prompt);
+      typing.remove();
+      await addMsg(reply,'bot',true);
+      busy=false;sendBtn.disabled=false;status.classList.remove('busy');status.title='Ready';
+      input.focus();
+    }
 
-      let toastTimer;
-      function showToast(msg) {
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
-      }
+    form.addEventListener('submit',e=>{e.preventDefault();handlePrompt(input.value)});
+    document.getElementById('suggestions').addEventListener('click',e=>{
+      const b=e.target.closest('button[data-q]');
+      if(b) handlePrompt(b.getAttribute('data-q'));
+    });
+    document.getElementById('clearChat').addEventListener('click',()=>{
+      chat.innerHTML='';
+      addMsg('Chat cleared. Prompt me anytime — online model or local brain.','bot');
+    });
 
-      function foxClick() {
-        const r = avatar.getBoundingClientRect();
-        burst(r.left + r.width / 2, r.top + r.height / 2, 22);
-        showToast('Fox power!');
-      }
-      avatar.addEventListener('click', foxClick);
-      avatar.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); foxClick(); }
-      });
+    addMsg('Hello! I am Fox AI (open source). Pick a model above, type a prompt, or try a suggestion. Games live at /games/.','bot');
 
-      // Focus prompt on load for desktop
-      if (window.innerWidth >= 900) setTimeout(() => input.focus(), 400);
-    })();
+    function updateClock(){
+      clock.textContent=new Date().toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    }
+    updateClock();setInterval(updateClock,1000);
+
+    function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+    resize();window.addEventListener('resize',resize);
+    function burst(x,y,n){
+      if(reduceMotion)return;
+      for(let i=0;i<n;i++){
+        const a=(Math.PI*2*i)/n+Math.random()*0.3,s=2+Math.random()*4;
+        particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,size:2+Math.random()*3,color:Math.random()>0.5?'#ff6b35':'#fbbf24'});
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles=particles.filter(p=>p.life>0);
+      for(const p of particles){
+        p.x+=p.vx;p.y+=p.vy;p.vy+=0.08;p.life-=0.02;
+        ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();
+      }
+      ctx.globalAlpha=1;requestAnimationFrame(tick);
+    }
+    if(!reduceMotion)requestAnimationFrame(tick);
+
+    let toastTimer;
+    function showToast(m){toast.textContent=m;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2000)}
+    function foxClick(){
+      const r=avatar.getBoundingClientRect();
+      burst(r.left+r.width/2,r.top+r.height/2,22);showToast('Fox power!');
+    }
+    avatar.addEventListener('click',foxClick);
+    avatar.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();foxClick()}});
+    if(window.innerWidth>=900) setTimeout(()=>input.focus(),400);
+  })();
   </script>
 </body>
 </html>

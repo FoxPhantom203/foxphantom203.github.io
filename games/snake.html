@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Snake | Fox Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0b0f; --surface:#16161e; --accent:#ff6b35; --text:#e8e8ed; --muted:#9a9aad; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--text);
+      min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; padding:1rem; gap:1rem;
+    }
+    a { color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    a:hover { color:var(--accent); }
+    h1 { font-family:Orbitron,sans-serif; font-size:1.3rem; color:var(--accent); }
+    .hud { display:flex; gap:1.5rem; font-weight:600; font-variant-numeric:tabular-nums; }
+    canvas {
+      background:var(--surface); border-radius:12px; border:1px solid rgba(255,255,255,0.08);
+      max-width:100%; touch-action:none;
+    }
+    .controls { display:none; gap:0.4rem; flex-wrap:wrap; justify-content:center; }
+    @media (max-width:600px) { .controls { display:flex; } }
+    .controls button {
+      width:52px; height:52px; border:none; border-radius:12px;
+      background:#22222e; color:#fff; font-size:1.2rem; cursor:pointer;
+    }
+    .controls button:active { background:var(--accent); }
+    .row { display:flex; gap:0.4rem; }
+    .msg { color:var(--muted); font-size:0.85rem; text-align:center; min-height:1.2em; }
+  </style>
+</head>
+<body>
+  <a href="./">← Games</a>
+  <h1>Snake</h1>
+  <div class="hud"><span>Score: <span id="score">0</span></span><span>Best: <span id="best">0</span></span></div>
+  <canvas id="c" width="400" height="400"></canvas>
+  <p class="msg" id="msg">Arrow keys or WASD · Space to pause</p>
+  <div class="controls">
+    <div class="row" style="width:100%;justify-content:center"><button data-d="u">▲</button></div>
+    <div class="row">
+      <button data-d="l">◀</button><button data-d="d">▼</button><button data-d="r">▶</button>
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const GS = 20, N = 20;
+    let snake, dir, nextDir, food, score, alive, paused, tick;
+    const bestKey = 'fox_snake_best';
+    document.getElementById('best').textContent = localStorage.getItem(bestKey) || 0;
+
+    function reset() {
+      snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+      dir = nextDir = {x:1,y:0};
+      food = place();
+      score = 0; alive = true; paused = false;
+      document.getElementById('score').textContent = 0;
+      document.getElementById('msg').textContent = 'Arrow keys or WASD · Space to pause';
+    }
+    function place() {
+      let p;
+      do { p = {x:Math.floor(Math.random()*N), y:Math.floor(Math.random()*N)}; }
+      while (snake.some(s => s.x===p.x && s.y===p.y));
+      return p;
+    }
+    function step() {
+      if (!alive || paused) return;
+      dir = nextDir;
+      const h = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+      if (h.x<0||h.x>=N||h.y<0||h.y>=N||snake.some(s=>s.x===h.x&&s.y===h.y)) {
+        alive = false;
+        document.getElementById('msg').textContent = 'Game over — press R or tap to restart';
+        const b = Math.max(score, +(localStorage.getItem(bestKey)||0));
+        localStorage.setItem(bestKey, b);
+        document.getElementById('best').textContent = b;
+        return;
+      }
+      snake.unshift(h);
+      if (h.x===food.x && h.y===food.y) {
+        score++; document.getElementById('score').textContent = score;
+        food = place();
+      } else snake.pop();
+    }
+    function draw() {
+      ctx.fillStyle = '#16161e'; ctx.fillRect(0,0,400,400);
+      ctx.fillStyle = '#ff6b35';
+      ctx.beginPath();
+      ctx.roundRect(food.x*GS+2, food.y*GS+2, GS-4, GS-4, 4);
+      ctx.fill();
+      snake.forEach((s,i) => {
+        ctx.fillStyle = i===0 ? '#fbbf24' : '#ff8c5a';
+        ctx.fillRect(s.x*GS+1, s.y*GS+1, GS-2, GS-2);
+      });
+    }
+    function loop() { step(); draw(); }
+    reset(); draw();
+    tick = setInterval(loop, 110);
+
+    const map = {
+      ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1}, ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0},
+      w:{x:0,y:-1}, s:{x:0,y:1}, a:{x:-1,y:0}, d:{x:1,y:0}, W:{x:0,y:-1}, S:{x:0,y:1}, A:{x:-1,y:0}, D:{x:1,y:0}
+    };
+    document.addEventListener('keydown', e => {
+      if (e.key===' ' ) { paused=!paused; document.getElementById('msg').textContent = paused?'Paused':''; return; }
+      if ((e.key==='r'||e.key==='R') && !alive) { reset(); return; }
+      const nd = map[e.key];
+      if (nd && (nd.x!==-dir.x || nd.y!==-dir.y)) nextDir = nd;
+    });
+    document.querySelectorAll('[data-d]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!alive) { reset(); return; }
+        const d = btn.dataset.d;
+        const nd = d==='u'?{x:0,y:-1}:d==='d'?{x:0,y:1}:d==='l'?{x:-1,y:0}:{x:1,y:0};
+        if (nd.x!==-dir.x || nd.y!==-dir.y) nextDir = nd;
+      });
+    });
+    canvas.addEventListener('click', () => { if (!alive) reset(); });
+  </script>
+</body>
+</html>

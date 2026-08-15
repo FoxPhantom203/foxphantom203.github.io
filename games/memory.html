@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Match | Fox Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0b0f; --surface:#16161e; --accent:#ff6b35; --text:#e8e8ed; --muted:#9a9aad; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      font-family:Inter,system-ui,sans-serif; background:var(--bg); color:var(--text);
+      min-height:100dvh; display:flex; flex-direction:column; align-items:center;
+      padding:1.25rem; gap:1rem;
+    }
+    a { color:var(--muted); text-decoration:none; font-size:0.85rem; }
+    a:hover { color:var(--accent); }
+    h1 { font-family:Orbitron,sans-serif; font-size:1.3rem; color:var(--accent); }
+    .hud { display:flex; gap:1.25rem; font-weight:600; font-size:0.9rem; }
+    .board {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem;
+      width:min(360px,92vw);
+    }
+    .card {
+      aspect-ratio:1; border-radius:12px; cursor:pointer;
+      background:var(--surface); border:1px solid rgba(255,255,255,0.08);
+      display:grid; place-items:center; font-size:1.6rem;
+      transition:transform 0.2s, background 0.2s; user-select:none;
+      transform-style:preserve-3d;
+    }
+    .card:hover:not(.flipped):not(.matched) { border-color:rgba(255,107,53,0.4); }
+    .card.flipped, .card.matched {
+      background:linear-gradient(135deg,#2a1a12,#1e1e28);
+      border-color:rgba(255,107,53,0.35);
+    }
+    .card.matched { opacity:0.7; pointer-events:none; }
+    .card .face { display:none; }
+    .card.flipped .face, .card.matched .face { display:block; }
+    .card .back { color:var(--accent); font-weight:700; }
+    .card.flipped .back, .card.matched .back { display:none; }
+    button.restart {
+      margin-top:0.5rem; padding:0.55rem 1.2rem; border:none; border-radius:999px;
+      background:var(--accent); color:#fff; font-weight:600; cursor:pointer; font-family:inherit;
+    }
+  </style>
+</head>
+<body>
+  <a href="./">← Games</a>
+  <h1>Memory Match</h1>
+  <div class="hud"><span>Moves: <span id="moves">0</span></span><span>Pairs: <span id="pairs">0</span>/8</span></div>
+  <div class="board" id="board"></div>
+  <button class="restart" id="restart">New game</button>
+  <script>
+    const icons = ['🦊','🌟','🔥','💎','🌙','⚡','🎯','🚀'];
+    let cards = [], flipped = [], lock = false, moves = 0, pairs = 0;
+
+    function shuffle(a) {
+      for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+      return a;
+    }
+    function build() {
+      const board = document.getElementById('board');
+      board.innerHTML = '';
+      flipped = []; lock = false; moves = 0; pairs = 0;
+      document.getElementById('moves').textContent = 0;
+      document.getElementById('pairs').textContent = 0;
+      cards = shuffle([...icons, ...icons]).map((icon, i) => {
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = '<span class="back">?</span><span class="face">'+icon+'</span>';
+        el.dataset.icon = icon;
+        el.addEventListener('click', () => flip(el));
+        board.appendChild(el);
+        return el;
+      });
+    }
+    function flip(el) {
+      if (lock || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+      el.classList.add('flipped');
+      flipped.push(el);
+      if (flipped.length < 2) return;
+      moves++; document.getElementById('moves').textContent = moves;
+      lock = true;
+      const [a,b] = flipped;
+      if (a.dataset.icon === b.dataset.icon) {
+        a.classList.add('matched'); b.classList.add('matched');
+        pairs++; document.getElementById('pairs').textContent = pairs;
+        flipped = []; lock = false;
+        if (pairs === 8) setTimeout(() => alert('You won in '+moves+' moves!'), 200);
+      } else {
+        setTimeout(() => {
+          a.classList.remove('flipped'); b.classList.remove('flipped');
+          flipped = []; lock = false;
+        }, 650);
+      }
+    }
+    document.getElementById('restart').onclick = build;
+    build();
+  </script>
+</body>
+</html>

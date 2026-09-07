@@ -1,0 +1,22 @@
+instructions: |
+  Keep this portfolio friendly, playful, accessible, and free of dystopian or hostile AI themes.
+  Prefer vanilla HTML, CSS, and JavaScript.
+  Preserve existing visual style and functionality.
+  Keep external embeds inside the portfolio instead of redirecting users away.
+  Do not add secrets, API keys, tracking scripts, or unnecessary dependencies.
+  Use accessible labels, keyboard controls, reduced-motion support, and responsive layouts.
+  Validate changed files before finishing.
+
+scripts:
+  - name: Validate HTML
+    command: |
+      node -e "const fs=require('fs'); const html=fs.readFileSync('index.html','utf8'); if(!html.includes('<!DOCTYPE html>')) process.exit(1); if((html.match(/<script/g)||[]).length !== (html.match(/<\/script>/g)||[]).length) process.exit(1); console.log('HTML sanity check passed')"
+    triggers:
+      - session.create
+
+server_ready_pattern: '(?i)(https?://\S+)'
+auto_open_in_browser: true
+
+automation:
+  auto_issue_session: true
+  remote_control: false

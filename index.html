@@ -16,6 +16,9 @@
   <meta name="twitter:title" content="FoxPhantom203 | Foxor AI Portfolio">
   <meta name="twitter:description" content="Advanced open-source AI assistant with games, code samples, and more.">
   <title>FoxPhantom203 | Foxor AI</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><ellipse cx='32' cy='38' rx='18' ry='16' fill='%23ff6b35'/><path d='M14 22 L8 6 L22 16 Z' fill='%23ff6b35'/><path d='M50 22 L56 6 L42 16 Z' fill='%23ff6b35'/><path d='M14 22 L8 6 L18 14 Z' fill='%23c2410c'/><path d='M50 22 L56 6 L46 14 Z' fill='%23c2410c'/><ellipse cx='32' cy='40' rx='10' ry='9' fill='%23fff7ed'/><circle cx='24' cy='34' r='3.2' fill='%231c1917'/><circle cx='40' cy='34' r='3.2' fill='%231c1917'/><circle cx='24.8' cy='33.2' r='1.1' fill='%23fff'/><circle cx='40.8' cy='33.2' r='1.1' fill='%23fff'/><ellipse cx='32' cy='40' rx='2.2' ry='1.6' fill='%231c1917'/><path d='M28 44 Q32 48 36 44' fill='none' stroke='%231c1917' stroke-width='1.5' stroke-linecap='round'/></svg>" type='image/svg+xml'>
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><ellipse cx='90' cy='105' rx='50' ry='45' fill='%23ff6b35'/><path d='M42 66 L24 18 L66 54 Z' fill='%23ff6b35'/><path d='M138 66 L156 18 L114 54 Z' fill='%23ff6b35'/><path d='M42 66 L24 18 L50 42 Z' fill='%23c2410c'/><path d='M138 66 L156 18 L122 42 Z' fill='%23c2410c'/><ellipse cx='90' cy='105' rx='28' ry='25' fill='%23fff7ed'/><circle cx='68' cy='81' r='9' fill='%231c1917'/><circle cx='112' cy='81' r='9' fill='%231c1917'/><circle cx='69.6' cy='79.6' r='3' fill='%23fff'/><circle cx='113.6' cy='79.6' r='3' fill='%23fff'/><ellipse cx='90' cy='105' rx='6' ry='4.5' fill='%231c1917'/><path d='M80 120 Q90 135 100 120' fill='none' stroke='%231c1917' stroke-width='4' stroke-linecap='round'/></svg>" type='image/svg+xml'>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
@@ -181,7 +184,7 @@
     @media(prefers-reduced-motion:reduce){.orb,.avatar-wrap{animation:none!important}.msg{animation:none}}
     @media(max-width:480px){.ai-panel{min-height:360px;max-height:70dvh}.profile{padding:1.5rem 1.25rem}}
   
-    /* Foxor AI Custom Cursor */
+    /* Foxor AI Custom Cursor - Rodless Pointer (Circle Only) */
     body.foxor-cursor-enabled {
       cursor: none !important;
     }
@@ -195,50 +198,39 @@
       transition: transform 0.1s ease-out;
       transform: translate(-50%, -50%);
     }
-    .foxor-custom-cursor .cursor-inner {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: radial-gradient(circle at center, #ff6b35 0%, #ff8c42 40%, #ffa500 80%);
-      box-shadow: 0 0 8px rgba(255, 107, 53, 0.6), 0 0 16px rgba(255, 107, 53, 0.3);
-      animation: cursor-pulse 1.5s ease-in-out infinite;
+    /* SVG-based rodless pointer cursor */
+    .foxor-custom-cursor svg {
+      width: 24px;
+      height: 24px;
+      filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.7));
+      transition: all 0.15s ease-out;
     }
-    .foxor-custom-cursor .cursor-outer {
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      border: 2px solid rgba(255, 107, 53, 0.3);
-      border-radius: 50%;
-      animation: cursor-outer-pulse 2s ease-in-out infinite;
-      opacity: 0.5;
-    }
-    .foxor-custom-cursor.clicking .cursor-inner {
-      transform: scale(0.8);
-      box-shadow: 0 0 4px rgba(255, 107, 53, 0.8);
-    }
-    @keyframes cursor-pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
-    @keyframes cursor-outer-pulse {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.2); opacity: 0.2; }
+    .foxor-custom-cursor.clicking svg {
+      transform: scale(0.9);
+      filter: drop-shadow(0 0 4px rgba(255, 107, 53, 0.9));
     }
     @media (prefers-reduced-motion: reduce) {
-      .foxor-custom-cursor .cursor-inner,
-      .foxor-custom-cursor .cursor-outer {
-        animation: none !important;
+      .foxor-custom-cursor svg {
+        transition: none !important;
       }
     }
 </style>
 </head>
 <body>
   <div class="foxor-custom-cursor" id="foxorCursor">
-    <div class="cursor-outer"></div>
-    <div class="cursor-inner"></div>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="8" fill="url(#foxor-gradient)" />
+    </svg>
   </div>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <defs>
+      <radialGradient id="foxor-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#ff6b35"/>
+        <stop offset="40%" stop-color="#ff8c42"/>
+        <stop offset="80%" stop-color="#ffa500"/>
+      </radialGradient>
+    </defs>
     <symbol id="icon-fox" viewBox="0 0 64 64">
       <ellipse cx="32" cy="38" rx="18" ry="16" fill="#ff6b35"/>
       <path d="M14 22 L8 6 L22 16 Z" fill="#ff6b35"/><path d="M50 22 L56 6 L42 16 Z" fill="#ff6b35"/>
@@ -563,11 +555,10 @@
     if(window.innerWidth>=900) setTimeout(()=>input.focus(),400);
   })();
   
-    // Foxor Custom Cursor
+    // Foxor Custom Cursor (SVG Rodless Pointer)
     const cursor = document.getElementById('foxorCursor');
     const cursorToggle = document.getElementById('cursorToggle');
     let cursorEnabled = false;
-    let isClicking = false;
 
     function updateCursorPosition(e) {
       if (!cursorEnabled) return;
@@ -580,7 +571,7 @@
       if (cursorEnabled) {
         document.body.classList.add('foxor-cursor-enabled');
         cursorToggle.textContent = 'Hide Foxy Cursor';
-        cursor.style.display = 'flex';
+        cursor.style.display = 'block';
       } else {
         document.body.classList.remove('foxor-cursor-enabled');
         cursorToggle.textContent = 'Show Foxy Cursor';
@@ -592,13 +583,16 @@
     document.addEventListener('mousemove', updateCursorPosition);
     document.addEventListener('mousedown', () => {
       if (cursorEnabled) {
-        isClicking = true;
         cursor.classList.add('clicking');
       }
     });
     document.addEventListener('mouseup', () => {
       if (cursorEnabled) {
-        isClicking = false;
+        cursor.classList.remove('clicking');
+      }
+    });
+    document.addEventListener('mouseleave', () => {
+      if (cursorEnabled) {
         cursor.classList.remove('clicking');
       }
     });

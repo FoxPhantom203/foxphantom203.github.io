@@ -217,20 +217,21 @@
 </style>
 </head>
 <body>
-  <div class="foxor-custom-cursor" id="foxorCursor">
+  <div class="foxor-custom-cursor" id="foxorCursor" style="display: none; pointer-events: none; z-index: 9999; position: fixed;">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="8" fill="url(#foxor-gradient)" />
+      <defs>
+        <radialGradient id="cursorGradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff6b35"/>
+          <stop offset="40%" stop-color="#ff8c42"/>
+          <stop offset="80%" stop-color="#ffa500"/>
+        </radialGradient>
+      </defs>
+      <circle cx="12" cy="12" r="8" fill="url(#cursorGradient)" />
     </svg>
   </div>
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
-    <defs>
-      <radialGradient id="foxor-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-        <stop offset="0%" stop-color="#ff6b35"/>
-        <stop offset="40%" stop-color="#ff8c42"/>
-        <stop offset="80%" stop-color="#ffa500"/>
-      </radialGradient>
-    </defs>
+
     <symbol id="icon-fox" viewBox="0 0 64 64">
       <ellipse cx="32" cy="38" rx="18" ry="16" fill="#ff6b35"/>
       <path d="M14 22 L8 6 L22 16 Z" fill="#ff6b35"/><path d="M50 22 L56 6 L42 16 Z" fill="#ff6b35"/>
@@ -296,6 +297,12 @@
       <circle cx="16" cy="16" r="2" fill="#ffa500"/>
       <path d="M16 0 L18 6 L24 8 L20 12 L22 18 L16 14 L10 18 L12 12 L8 8 L14 6 Z" fill="#ff4500"/>
     </symbol>
+    <symbol id="icon-github-favicon" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.792-.261.792-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.608 1.651.242 2.972.118 3.176 1.504 1.627 2.717 2.972 2.717 3.689 2.474 4.34 3.47 4.34 5.927 0 4.607-2.808 5.476-5.935.344-.299.655-.92.655-1.895 0-1.033-.003-1.825-.003-2.665 0-.567.418-.954.844-1.322-2.492-.254-4.994-.344-7.14-.405.584-.177 1.126-.523 1.625-.956 2.522-1.868 5.337-2.265 5.337-2.265.992-.684 2.055-.202 2.055-.202.945.73.989 1.577.989 1.577.979 3.156 2.828 1.974 3.448 1.654.101-.774.418-1.305.762-1.605-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.608 1.651.242 2.972.118 3.176 1.504 1.627 2.717 2.972 2.717 3.689 2.474 4.34 3.47 4.34 5.927 0 4.607-2.808 5.476-5.935.344-.299.655-.92.655-1.895 0-1.033-.003-1.825-.003-2.665 0-.567.418-.954.844-1.322-2.492-.254-4.994-.344-7.14-.405.584-.177 1.126-.523 1.625-.956 2.522-1.868 5.337-2.265 5.337-2.265.992-.684 2.055-.202 2.055-.202.945.73.989 1.577.989 1.577.979 3.156 2.828 1.974 3.448 1.654z" />
+    </symbol>
+    <symbol id="icon-archive" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M20.55 3.54a1 1 0 0 0-1.03-.09 12.64 12.64 0 0 0-4.55 1.27c-.99.25-1.9.66-2.73 1.22a1 1 0 0 0-.54.85 1 1 0 0 0 .43.86c.6.33 1.23.58 1.88.75.75.2 1.5.28 2.25.28a15.16 15.16 0 0 0 5.48 0c.75 0 1.5-.08 2.25-.28.65-.17 1.28-.42 1.88-.75a1 1 0 0 0 .43-.86 1 1 0 0 0-.54-.85c-.83-.56-1.74-.97-2.73-1.22a12.64 12.64 0 0 0-4.55-1.27 1 1 0 0 0-1.03.09 1 1 0 0 0-.7.72c.2.72.58 1.38 1.12 1.95a10.2 10.2 0 0 0 3.38 2.72c.4.14.8.24 1.2.31.4.07.8.1.12.11a1 1 0 0 0 .82-.44c.24-.4.38-.87.4-1.34.03-.7-.1-1.38-.4-2a11.86 11.86 0 0 1-3.3-2.68c-.54-.57-.92-1.23-1.12-1.95a1 1 0 0 0-.7-.71zM8.55 6.46a1 1 0 0 0-1.03.09 12.64 12.64 0 0 0-4.55-1.27A1 1 0 0 0 2 4.5a1 1 0 0 0-.7.72c.2.72.58 1.38 1.12 1.95a10.2 10.2 0 0 0 3.38 2.72c.4.14.8.24 1.2.31.4.07.8.1 1.2.11a1 1 0 0 0 .82-.44c.24-.4.38-.87.4-1.34.02-.7-.1-1.38-.4-2a11.86 11.86 0 0 1-3.3-2.68c-.54-.57-.92-1.23-1.12-1.95a1 1 0 0 0-.7-.71zM12 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm6.45-5.04a1 1 0 0 0-1.41 0 10.2 10.2 0 0 0-3.38-2.72c-.4-.14-.8-.24-1.2-.31a1 1 0 0 0-.82.44c-.24.4-.38.87-.4 1.34a1 1 0 0 0 .7.72c.2.72.58 1.38 1.12 1.95a11.86 11.86 0 0 0 3.3 2.68c.4.14.8.24 1.2.31.4.07.8.1 1.2.11a1 1 0 0 0 .82-.44c.24-.4.38-.87.4-1.34.02-.7-.1-1.38-.4-2a1 1 0 0 0-.7-.72c-.54-.57-.92-1.23-1.12-1.95z" />
+    </symbol>
   </svg>
 
   <div class="orb orb-1" aria-hidden="true"></div>
@@ -321,7 +328,12 @@
         <a class="secondary" href="games/"><svg><use href="#icon-game"/></svg> Games</a>
         <a class="secondary" href="mailto:foxphantom203@tutamail.com"><svg><use href="#icon-mail"/></svg> Email</a>
       </div>
-<button type="button" class="cursor-toggle" id="cursorToggle" style="background: var(--accent); border: none; padding: 0.55rem 1.15rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; color: #fff; cursor: pointer; margin-top: 0.5rem;">Toggle Foxy Cursor</button>      <p class="oss">
+<button type="button" class="cursor-toggle" id="cursorToggle" style="background: var(--accent); border: none; padding: 0.55rem 1.15rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; color: #fff; cursor: pointer; margin-top: 0.5rem;">Toggle Foxy Cursor</button><a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="support-btn" style="background: #24292f; border: none; padding: 0.55rem; border-radius: 999px; cursor: pointer; margin-left: 0.5rem; display: inline-flex; align-items: center;">
+      <svg width="18" height="18" style="fill: white;" ><use href="#icon-github-favicon"/></svg>
+    </a>
+    <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="support-btn" style="background: #163020; border: none; padding: 0.55rem; border-radius: 999px; cursor: pointer; margin-left: 0.5rem; display: inline-flex; align-items: center;">
+      <svg width="18" height="18" style="fill: white;" ><use href="#icon-archive"/></svg>
+    </a>      <p class="oss">
         Foxor AI is <strong>open source</strong> on this site — free public models via
         <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations</a>,
         local fallback brain, no API keys stored. Fork the
@@ -572,7 +584,11 @@
         document.body.classList.add('foxor-cursor-enabled');
         cursorToggle.textContent = 'Hide Foxy Cursor';
         cursor.style.display = 'block';
-      } else {
+      }
+
+    // Initialize cursor state
+    cursor.style.display = 'none';
+    cursorToggle.textContent = 'Show Foxy Cursor'; else {
         document.body.classList.remove('foxor-cursor-enabled');
         cursorToggle.textContent = 'Show Foxy Cursor';
         cursor.style.display = 'none';

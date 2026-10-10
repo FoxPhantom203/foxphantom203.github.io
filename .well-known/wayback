@@ -1,0 +1,7 @@
+wayback=auto
+crawl=continuous
+frequency=daily
+depth=10
+user_agent=archive.org_bot,ia_archiver,Wayback
+respect_robots=true
+sitemap=https://foxphantom203.github.io/sitemap.xml

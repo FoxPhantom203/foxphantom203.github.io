@@ -1,13 +1,34 @@
 User-agent: *
 Allow: /
+Disallow: /private/
+Disallow: /admin/
 
 User-agent: archive.org_bot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ia_archiver
 Allow: /
+Crawl-delay: 1
 
 User-agent: Wayback
 Allow: /
+Crawl-delay: 1
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: Googlebot
+Allow: /
 
 Sitemap: https://foxphantom203.github.io/sitemap.xml
+Sitemap: https://foxphantom203.github.io/sitemap.xml
+
+# Wayback Machine Auto-Crawl Configuration
+# Allow Wayback Machine to crawl all pages continuously
+# This site is publicly archivable
+# Archive frequency: daily
+# Priority: high for all pages

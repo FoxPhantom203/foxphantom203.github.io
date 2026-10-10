@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Wayback Machine Auto-Crawl Configuration -->
+<!-- This file configures automatic archiving for foxphantom203.github.io -->
+<wayback>
+  <site url="https://foxphantom203.github.io/">
+    <crawl>
+      <!-- Enable automatic crawling -->
+      <enabled>true</enabled>
+      
+      <!-- Crawl frequency (daily, weekly, monthly) -->
+      <frequency>daily</frequency>
+      
+      <!-- Maximum depth to crawl -->
+      <depth>10</depth>
+      
+      <!-- Include all pages -->
+      <include>
+        <pattern>https://foxphantom203.github.io/*</pattern>
+        <pattern>https://foxphantom203.github.io/games/*</pattern>
+      </include>
+      
+      <!-- Priority pages -->
+      <priority>
+        <url>https://foxphantom203.github.io/</url>
+        <url>https://foxphantom203.github.io/index.html</url>
+        <url>https://foxphantom203.github.io/games/</url>
+        <url>https://foxphantom203.github.io/games/index.html</url>
+      </priority>
+      
+      <!-- User agent identification -->
+      <useragents>
+        <agent>archive.org_bot</agent>
+        <agent>ia_archiver</agent>
+        <agent>Wayback</agent>
+      </useragents>
+      
+      <!-- Sitemap location -->
+      <sitemap>https://foxphantom203.github.io/sitemap.xml</sitemap>
+      
+      <!-- Crawl delay in seconds -->
+      <delay>1</delay>
+      
+      <!-- Respect robots.txt -->
+      <respect_robots>true</respect_robots>
+    </crawl>
+    
+    <archive>
+      <!-- Enable automatic archiving -->
+      <enabled>true</enabled>
+      
+      <!-- Archive on every change -->
+      <on_change>true</on_change>
+      
+      <!-- Archive frequency -->
+      <frequency>daily</frequency>
+      
+      <!-- Store complete page including resources -->
+      <capture_all>true</capture_all>
+      
+      <!-- Include screenshots -->
+      <screenshots>true</screenshots>
+    </archive>
+    
+    <notification>
+      <!-- Notify when new archive is available -->
+      <enabled>true</enabled>
+      <email>foxphantom203@tutamail.com</email>
+    </notification>
+  </site>
+</wayback>

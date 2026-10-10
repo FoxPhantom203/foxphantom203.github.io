@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Maze Escape | Fox Games</title>
+  <meta name="description" content="Escape the maze! Find the exit in this challenging puzzle game.">
+  <link rel="canonical" href="https://foxphantom203.github.io/games/maze.html">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0f;
+      --surface: #16161e;
+      --surface-2: #1f1f2a;
+      --text: #e8e8ed;
+      --muted: #9a9aad;
+      --accent: #ff6b35;
+      --accent-2: #fbbf24;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-2: rgba(255, 107, 53, 0.4);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+    a::before {
+      content: '\u2190';
+    }
+    h1 {
+      font-family: Orbitron, sans-serif;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .game-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    .maze-wrapper {
+      position: relative;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    #maze {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      grid-template-rows: repeat(15, 1fr);
+      gap: 1px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      overflow: hidden;
+      min-width: 300px;
+      min-height: 300px;
+      aspect-ratio: 1/1;
+    }
+    .cell {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .cell:hover {
+      background: rgba(255, 107, 53, 0.15);
+    }
+    .cell:active {
+      transform: scale(0.92);
+    }
+    .cell.wall {
+      background: var(--surface-2);
+      cursor: not-allowed;
+    }
+    .cell.start {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: var(--bg);
+      font-weight: bold;
+    }
+    .cell.exit {
+      background: linear-gradient(135deg, var(--success), #10b981);
+      color: var(--bg);
+      font-weight: bold;
+    }
+    .cell.path {
+      background: rgba(255, 107, 53, 0.3);
+    }
+    .cell.visited {
+      background: rgba(255, 107, 53, 0.2);
+    }
+    .cell.player {
+      background: var(--accent);
+      border-radius: 50%;
+      color: var(--bg);
+      font-weight: bold;
+      z-index: 10;
+    }
+    .hud {
+      display: flex;
+      gap: 1.5rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hud-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.8rem;
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .hud-item .label {
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    .hud-item .value {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+    .controls button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .controls button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(255, 107, 53, 0.1);
+    }
+    .controls button:active {
+      transform: scale(0.95);
+    }
+    .msg {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      min-height: 1.2em;
+    }
+    .msg.success {
+      color: var(--success);
+    }
+    .msg.danger {
+      color: var(--danger);
+    }
+    .difficulty-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .difficulty-selector label {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .difficulty-selector select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+    .difficulty-selector select:focus {
+      border-color: var(--accent);
+    }
+    .difficulty-selector select option {
+      background: var(--surface-2);
+    }
+    @media (max-width: 480px) {
+      .controls {
+        flex-direction: column;
+        width: 100%;
+      }
+      .controls button {
+        width: 100%;
+      }
+      #maze {
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="./">Back to Games</a>
+  <div class="game-container">
+    <h1>Maze Escape</h1>
+    <p class="sub">Find the exit! Use arrow keys or tap to move.</p>
+    
+    <div class="difficulty-selector">
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty">
+        <option value="easy">Easy (10x10)</option>
+        <option value="medium" selected>Medium (15x15)</option>
+        <option value="hard">Hard (20x20)</option>
+      </select>
+    </div>
+    
+    <div class="hud">
+      <div class="hud-item">
+        <span class="label">Moves:</span>
+        <span class="value" id="moves">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">Time:</span>
+        <span class="value" id="time">0s</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">Best:</span>
+        <span class="value" id="best">-</span>
+      </div>
+    </div>
+    
+    <div class="maze-wrapper">
+      <div id="maze"></div>
+    </div>
+    
+    <p class="msg" id="msg">Arrow keys or tap adjacent cells to move. Find the exit!</p>
+    
+    <div class="controls">
+      <button id="newGame">New Game</button>
+      <button id="solve">Show Solution</button>
+      <button id="togglePath">Toggle Path</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const mazeEl = document.getElementById('maze');
+      const movesEl = document.getElementById('moves');
+      const timeEl = document.getElementById('time');
+      const bestEl = document.getElementById('best');
+      const msgEl = document.getElementById('msg');
+      const newGameBtn = document.getElementById('newGame');
+      const solveBtn = document.getElementById('solve');
+      const togglePathBtn = document.getElementById('togglePath');
+      const difficultySel = document.getElementById('difficulty');
+
+      let maze = [];
+      let playerPos = { x: 0, y: 0 };
+      let exitPos = { x: 0, y: 0 };
+      let moves = 0;
+      let startTime = Date.now();
+      let timerInterval;
+      let showPath = false;
+      let solutionPath = [];
+      let size = 15;
+
+      // Difficulty settings
+      const difficultySettings = {
+        easy: { size: 10, wallDensity: 0.3 },
+        medium: { size: 15, wallDensity: 0.4 },
+        hard: { size: 20, wallDensity: 0.5 }
+      };
+
+      // Load best score from localStorage
+      let bestScore = localStorage.getItem('mazeEscapeBest') || null;
+      if (bestScore) {
+        bestEl.textContent = bestScore + 's';
+      }
+
+      // Generate a new maze
+      function generateMaze() {
+        const settings = difficultySettings[difficultySel.value];
+        size = settings.size;
+        const wallDensity = settings.wallDensity;
+
+        // Create empty maze
+        maze = Array(size).fill().map(() => Array(size).fill(0));
+
+        // Place walls randomly
+        for (let y = 0; y < size; y++) {
+          for (let x = 0; x < size; x++) {
+            if (Math.random() < wallDensity) {
+              maze[y][x] = 1; // Wall
+            }
+          }
+        }
+
+        // Ensure there's a path from start to exit
+        // Start at top-left, exit at bottom-right
+        playerPos = { x: 0, y: 0 };
+        exitPos = { x: size - 1, y: size - 1 };
+        maze[playerPos.y][playerPos.x] = 0; // Start is always open
+        maze[exitPos.y][exitPos.x] = 0; // Exit is always open
+
+        // Find a path using BFS and clear walls along the path
+        const path = findPath(playerPos, exitPos);
+        if (path.length === 0) {
+          // No path found, try again
+          return generateMaze();
+        }
+
+        // Clear walls along the path
+        for (const pos of path) {
+          maze[pos.y][pos.x] = 0;
+        }
+
+        // Add some more walls for challenge
+        for (let y = 0; y < size; y++) {
+          for (let x = 0; x < size; x++) {
+            if (Math.random() < wallDensity * 0.3 && maze[y][x] === 0) {
+              // Don't block the direct path
+              if (!path.some(p => p.x === x && p.y === y)) {
+                maze[y][x] = 1;
+              }
+            }
+          }
+        }
+
+        // Ensure start and exit are still open
+        maze[playerPos.y][playerPos.x] = 0;
+        maze[exitPos.y][exitPos.x] = 0;
+
+        return maze;
+      }
+
+      // Find path using BFS
+      function findPath(start, end) {
+        const queue = [{ ...start, path: [] }];
+        const visited = new Set();
+        visited.add(`${start.x},${start.y}`);
+
+        const directions = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+
+        while (queue.length > 0) {
+          const current = queue.shift();
+
+          if (current.x === end.x && current.y === end.y) {
+            return current.path;
+          }
+
+          for (const [dx, dy] of directions) {
+            const nx = current.x + dx;
+            const ny = current.y + dy;
+
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size && 
+                maze[ny][nx] === 0 && 
+                !visited.has(`${nx},${ny}`)) {
+              visited.add(`${nx},${ny}`);
+              queue.push({
+                x: nx,
+                y: ny,
+                path: [...current.path, { x: nx, y: ny }]
+              });
+            }
+          }
+        }
+
+        return [];
+      }
+
+      // Find solution path
+      function findSolutionPath() {
+        const start = { ...playerPos };
+        const end = { ...exitPos };
+        const queue = [{ ...start, path: [] }];
+        const visited = new Set();
+        visited.add(`${start.x},${start.y}`);
+
+        const directions = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+
+        while (queue.length > 0) {
+          const current = queue.shift();
+
+          if (current.x === end.x && current.y === end.y) {
+            return current.path;
+          }
+
+          for (const [dx, dy] of directions) {
+            const nx = current.x + dx;
+            const ny = current.y + dy;
+
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size && 
+                maze[ny][nx] === 0 && 
+                !visited.has(`${nx},${ny}`)) {
+              visited.add(`${nx},${ny}`);
+              queue.push({
+                x: nx,
+                y: ny,
+                path: [...current.path, { x: nx, y: ny }]
+              });
+            }
+          }
+        }
+
+        return [];
+      }
+
+      // Render the maze
+      function renderMaze() {
+        mazeEl.innerHTML = '';
+        mazeEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+        mazeEl.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+        for (let y = 0; y < size; y++) {
+          for (let x = 0; x < size; x++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.dataset.x = x;
+            cell.dataset.y = y;
+
+            if (maze[y][x] === 1) {
+              cell.classList.add('wall');
+            } else if (x === playerPos.x && y === playerPos.y) {
+              cell.classList.add('player');
+              cell.textContent = '\uD83D\uDC0D';
+            } else if (x === exitPos.x && y === exitPos.y) {
+              cell.classList.add('exit');
+              cell.textContent = '\u2705';
+            } else if (x === 0 && y === 0) {
+              cell.classList.add('start');
+              cell.textContent = '\u25B6';
+            } else if (showPath && solutionPath.some(p => p.x === x && p.y === y)) {
+              cell.classList.add('path');
+            }
+
+            cell.addEventListener('click', () => handleCellClick(x, y));
+            mazeEl.appendChild(cell);
+          }
+        }
+      }
+
+      // Handle cell click
+      function handleCellClick(x, y) {
+        if (maze[y][x] === 1) return; // Can't move through walls
+
+        const dx = Math.abs(x - playerPos.x);
+        const dy = Math.abs(y - playerPos.y);
+
+        // Only allow adjacent moves (not diagonal)
+        if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {
+          movePlayer(x, y);
+        }
+      }
+
+      // Move player
+      function movePlayer(x, y) {
+        if (maze[y][x] === 1) return;
+
+        playerPos.x = x;
+        playerPos.y = y;
+        moves++;
+        movesEl.textContent = moves;
+
+        if (playerPos.x === exitPos.x && playerPos.y === exitPos.y) {
+          gameWon();
+        }
+
+        renderMaze();
+      }
+
+      // Game won
+      function gameWon() {
+        clearInterval(timerInterval);
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timeEl.textContent = elapsed + 's';
+
+        // Update best score
+        if (bestScore === null || elapsed < parseInt(bestScore)) {
+          bestScore = elapsed;
+          bestEl.textContent = elapsed + 's';
+          localStorage.setItem('mazeEscapeBest', elapsed);
+        }
+
+        msgEl.textContent = `You escaped in ${elapsed} seconds with ${moves} moves!`;
+        msgEl.className = 'msg success';
+      }
+
+      // Start new game
+      function newGame() {
+        maze = generateMaze();
+        moves = 0;
+        movesEl.textContent = '0';
+        startTime = Date.now();
+        msgEl.textContent = 'Find the exit!';
+        msgEl.className = 'msg';
+        showPath = false;
+        togglePathBtn.textContent = 'Show Solution';
+
+        // Clear timer
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          timeEl.textContent = elapsed + 's';
+        }, 1000);
+
+        renderMaze();
+      }
+
+      // Show solution
+      function showSolution() {
+        solutionPath = findSolutionPath();
+        showPath = !showPath;
+        togglePathBtn.textContent = showPath ? 'Hide Solution' : 'Show Solution';
+        renderMaze();
+      }
+
+      // Keyboard controls
+      function handleKeyDown(e) {
+        const keyMap = {
+          'ArrowUp': { dx: 0, dy: -1 },
+          'ArrowRight': { dx: 1, dy: 0 },
+          'ArrowDown': { dx: 0, dy: 1 },
+          'ArrowLeft': { dx: -1, dy: 0 },
+          'w': { dx: 0, dy: -1 },
+          'd': { dx: 1, dy: 0 },
+          's': { dx: 0, dy: 1 },
+          'a': { dx: -1, dy: 0 }
+        };
+
+        const move = keyMap[e.key.toLowerCase()];
+        if (move) {
+          const newX = playerPos.x + move.dx;
+          const newY = playerPos.y + move.dy;
+          movePlayer(newX, newY);
+        }
+      }
+
+      // Initialize
+      function init() {
+        newGame();
+        document.addEventListener('keydown', handleKeyDown);
+        newGameBtn.addEventListener('click', newGame);
+        solveBtn.addEventListener('click', showSolution);
+        togglePathBtn.addEventListener('click', showSolution);
+        difficultySel.addEventListener('change', newGame);
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>

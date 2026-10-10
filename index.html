@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="FoxPhantom203 — Creative fox. Open-source Fox AI, games, and portfolio.">
+  <meta name="description" content="FoxPhantom203 — Creative fox. Open-source Foxor AI with enhanced features, games, code samples, and portfolio.">
   <meta name="author" content="FoxPhantom203">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0f0f12">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#ff6b35">
   <link rel="canonical" href="https://foxphantom203.github.io/">
-  <meta property="og:title" content="FoxPhantom203 | Portfolio">
-  <meta property="og:description" content="Open-source Fox AI chatbot, minigames, and creative builds.">
+  <meta property="og:title" content="FoxPhantom203 | Portfolio with Foxor AI">
+  <meta property="og:description" content="Open-source Foxor AI assistant with enhanced features, 5 minigames, code samples in multiple languages, and creative builds.">
   <meta property="og:url" content="https://foxphantom203.github.io/">
-  <title>FoxPhantom203</title>
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FoxPhantom203 | Foxor AI Portfolio">
+  <meta name="twitter:description" content="Advanced open-source AI assistant with games, code samples, and more.">
+  <title>FoxPhantom203 | Foxor AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
@@ -176,9 +180,64 @@
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
     @media(prefers-reduced-motion:reduce){.orb,.avatar-wrap{animation:none!important}.msg{animation:none}}
     @media(max-width:480px){.ai-panel{min-height:360px;max-height:70dvh}.profile{padding:1.5rem 1.25rem}}
-  </style>
+  
+    /* Foxor AI Custom Cursor */
+    body.foxor-cursor-enabled {
+      cursor: none !important;
+    }
+    .foxor-custom-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.1s ease-out;
+      transform: translate(-50%, -50%);
+    }
+    .foxor-custom-cursor .cursor-inner {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #ff6b35 0%, #ff8c42 40%, #ffa500 80%);
+      box-shadow: 0 0 8px rgba(255, 107, 53, 0.6), 0 0 16px rgba(255, 107, 53, 0.3);
+      animation: cursor-pulse 1.5s ease-in-out infinite;
+    }
+    .foxor-custom-cursor .cursor-outer {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border: 2px solid rgba(255, 107, 53, 0.3);
+      border-radius: 50%;
+      animation: cursor-outer-pulse 2s ease-in-out infinite;
+      opacity: 0.5;
+    }
+    .foxor-custom-cursor.clicking .cursor-inner {
+      transform: scale(0.8);
+      box-shadow: 0 0 4px rgba(255, 107, 53, 0.8);
+    }
+    @keyframes cursor-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    @keyframes cursor-outer-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .foxor-custom-cursor .cursor-inner,
+      .foxor-custom-cursor .cursor-outer {
+        animation: none !important;
+      }
+    }
+</style>
 </head>
 <body>
+  <div class="foxor-custom-cursor" id="foxorCursor">
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+  </div>
+
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="icon-fox" viewBox="0 0 64 64">
       <ellipse cx="32" cy="38" rx="18" ry="16" fill="#ff6b35"/>
@@ -196,6 +255,55 @@
     <symbol id="icon-send" viewBox="0 0 24 24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
     <symbol id="icon-user" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></symbol>
     <symbol id="icon-game" viewBox="0 0 24 24"><path fill="currentColor" d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5S14.67 12 15.5 12s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></symbol>
+    <symbol id="emoji-fox" viewBox="0 0 128 128">
+      <ellipse cx="64" cy="80" rx="36" ry="32" fill="#ff6b35"/>
+      <path d="M28 44 L16 12 L44 32 Z" fill="#ff6b35"/>
+      <path d="M100 44 L112 12 L84 32 Z" fill="#ff6b35"/>
+      <path d="M28 44 L16 12 L32 28 Z" fill="#c2410c"/>
+      <path d="M100 44 L112 12 L96 28 Z" fill="#c2410c"/>
+      <ellipse cx="64" cy="82" rx="20" ry="18" fill="#fff7ed"/>
+      <circle cx="48" cy="68" r="6.4" fill="#1c1917"/>
+      <circle cx="80" cy="68" r="6.4" fill="#1c1917"/>
+      <circle cx="49.6" cy="66.4" r="2.2" fill="#fff"/>
+      <circle cx="81.6" cy="66.4" r="2.2" fill="#fff"/>
+      <ellipse cx="64" cy="82" rx="4.4" ry="3.2" fill="#1c1917"/>
+      <path d="M56 88 Q64 96 72 88" fill="none" stroke="#1c1917" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="32" cy="70" rx="8" ry="12" fill="#ff8c42"/>
+      <ellipse cx="96" cy="70" rx="8" ry="12" fill="#ff8c42"/>
+    </symbol>
+    <symbol id="emoji-fire" viewBox="0 0 64 64">
+      <path d="M32 5 L12 18 L22 28 L32 38 L42 28 L52 18 Z" fill="#ff4500"/>
+      <path d="M32 10 L18 22 L26 32 L32 42 L38 32 L46 22 Z" fill="#ff6600"/>
+      <path d="M32 15 L24 26 L32 37 L40 26 Z" fill="#ffa500"/>
+      <path d="M32 20 L28 28 L32 34 L36 28 Z" fill="#ffd700"/>
+    </symbol>
+    <symbol id="emoji-star" viewBox="0 0 64 64">
+      <path d="M32 4 L38 22 L56 22 L42 34 L48 52 L32 42 L16 52 L22 34 L8 22 L26 22 Z" fill="#fbbf24"/>
+    </symbol>
+    <symbol id="emoji-heart" viewBox="0 0 64 64">
+      <path d="M32 52 L24 44 L8 32 L8 20 L16 12 L32 4 L48 12 L56 20 L56 32 L40 44 Z" fill="#ff4444"/>
+      <path d="M32 52 L32 44 L40 44 L56 32 L56 24 L48 16 L32 8 L16 16 L8 24 L8 32 L24 44 Z" fill="#ff6666" opacity="0.7"/>
+    </symbol>
+    <symbol id="emoji-rocket" viewBox="0 0 64 64">
+      <ellipse cx="32" cy="48" rx="12" ry="16" fill="#ff6b35"/>
+      <path d="M20 48 L16 44 L20 40 Z" fill="#ff8c42"/>
+      <path d="M44 48 L48 44 L44 40 Z" fill="#ff8c42"/>
+      <rect x="28" y="12" width="8" height="36" fill="#ffa500"/>
+      <circle cx="32" cy="12" r="4" fill="#ff4500"/>
+      <path d="M32 8 L30 4 L34 4 Z" fill="#ff6600"/>
+    </symbol>
+    <symbol id="emoji-code" viewBox="0 0 64 64">
+      <rect x="8" y="8" width="48" height="48" rx="4" fill="#1e1e2e"/>
+      <path d="M16 16 L24 24 L16 32" stroke="#ff6b35" stroke-width="2" fill="none"/>
+      <path d="M40 20 L48 28 L40 36" stroke="#ff6b35" stroke-width="2" fill="none"/>
+      <path d="M20 40 L28 48 L20 56" stroke="#ff6b35" stroke-width="2" fill="none"/>
+    </symbol>
+    <symbol id="cursor-ember" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="8" fill="#ff6b35"/>
+      <circle cx="16" cy="16" r="4" fill="#ff8c42"/>
+      <circle cx="16" cy="16" r="2" fill="#ffa500"/>
+      <path d="M16 0 L18 6 L24 8 L20 12 L22 18 L16 14 L10 18 L12 12 L8 8 L14 6 Z" fill="#ff4500"/>
+    </symbol>
   </svg>
 
   <div class="orb orb-1" aria-hidden="true"></div>
@@ -221,8 +329,8 @@
         <a class="secondary" href="games/"><svg><use href="#icon-game"/></svg> Games</a>
         <a class="secondary" href="mailto:foxphantom203@tutamail.com"><svg><use href="#icon-mail"/></svg> Email</a>
       </div>
-      <p class="oss">
-        Fox AI is <strong>open source</strong> on this site — free public models via
+<button type="button" class="cursor-toggle" id="cursorToggle" style="background: var(--accent); border: none; padding: 0.55rem 1.15rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; color: #fff; cursor: pointer; margin-top: 0.5rem;">Toggle Foxy Cursor</button>      <p class="oss">
+        Foxor AI is <strong>open source</strong> on this site — free public models via
         <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations</a>,
         local fallback brain, no API keys stored. Fork the
         <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" target="_blank" rel="noopener">repo</a>.
@@ -230,11 +338,11 @@
       <div class="clock" id="clock" aria-live="polite"></div>
     </aside>
 
-    <section class="ai-panel" aria-label="Fox AI chatbot">
+    <section class="ai-panel" aria-label="Foxor AI chatbot">
       <div class="ai-header">
         <div class="ai-header-icon"><svg><use href="#icon-fox"/></svg></div>
         <div>
-          <h2>Fox AI</h2>
+          <h2>Foxor AI</h2>
           <p>Open-source · type a prompt</p>
         </div>
         <div class="status-dot" id="status" title="Ready"></div>
@@ -257,11 +365,11 @@
         <button type="button" data-q="Tell me a fun fox fact">Fox fact</button>
         <button type="button" data-q="Suggest a weekend coding project">Project idea</button>
         <button type="button" data-q="What games are on this site?">Games?</button>
-        <button type="button" data-q="Explain how Fox AI works">How Fox AI works</button>
+        <button type="button" data-q="Explain how Foxor AI works">How Foxor AI works</button>
       </div>
 
       <form class="composer" id="composer">
-        <input type="text" id="prompt" placeholder="Prompt Fox AI…" autocomplete="off" maxlength="600" aria-label="Your prompt">
+        <input type="text" id="prompt" placeholder="Prompt Foxor AI…" autocomplete="off" maxlength="600" aria-label="Your prompt">
         <button type="submit" id="sendBtn" aria-label="Send"><svg><use href="#icon-send"/></svg></button>
       </form>
     </section>
@@ -291,9 +399,9 @@
     let particles=[],busy=false;
     const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const SYSTEM='You are Fox AI, a friendly open-source assistant on FoxPhantom203 portfolio. FoxPhantom203 codes, builds, and ships pages. Site has minigames at /games/ (Snake, Memory, Reaction, Fox Clicker). Keep replies concise (2-6 sentences), helpful, playful fox energy. No emoji characters. If asked how you work: you use free public LLM endpoints (Pollinations) with a local rule-based fallback, all client-side, no stored API keys.';
+    const SYSTEM='You are Foxor AI, a friendly open-source assistant on FoxPhantom203 portfolio. FoxPhantom203 codes, builds, and ships pages. Site has minigames at /games/ (Snake, Memory, Reaction, Fox Clicker). Keep replies concise (2-6 sentences), helpful, playful fox energy. No emoji characters. If asked how you work: you use free public LLM endpoints (Pollinations) with a local rule-based fallback, all client-side, no stored API keys.';
 
-    function botLabel(){return '<span class="label"><svg><use href="#icon-fox"/></svg> Fox AI</span>'}
+    function botLabel(){return '<span class="label"><svg><use href="#icon-fox"/></svg> Foxor AI</span>'}
     function userLabel(){return '<span class="label"><svg><use href="#icon-user"/></svg> You</span>'}
 
     function addMsg(text,role,stream){
@@ -342,16 +450,16 @@
 
     function localReply(q){
       const t=q.toLowerCase();
-      if(/how (do you|does fox|fox ai) work|open.?source|model/.test(t))
-        return 'Fox AI runs fully in your browser. It calls free public text models on Pollinations (no API key on this site). If the network fails, a local rule-based brain answers instead. Source is on GitHub — fork and improve it.';
+      if(/how (do you|does fox|foxor ai) work|open.?source|model/.test(t))
+        return 'Foxor AI runs fully in your browser with enhanced features. It calls free public text models on Pollinations (no API key on this site). If the network fails, a local rule-based brain with code analysis and multi-language support answers instead. Source is on GitHub — fork and improve it.';
       if(/game/.test(t))
-        return 'This site has open minigames at /games/: Snake, Memory Match, Reaction Test, and Fox Clicker. Pure HTML, CSS, and JS — no installs.';
-      if(/who (are you|is fox)|what (are you|is fox ai)/.test(t))
-        return 'I am Fox AI — open-source assistant on FoxPhantom203\'s portfolio. Ask about projects, games, coding tips, or anything else.';
+        return 'This site has open minigames at /games/: Snake, Memory Match, Reaction Test, Fox Clicker, and Maze Escape. All pure HTML, CSS, and JS — no installs. Pure HTML, CSS, and JS — no installs.';
+      if(/who (are you|is fox)|what (are you|is foxor ai)/.test(t))
+        return 'I am Foxor AI — open-source assistant on FoxPhantom203\'s portfolio. Ask about projects, games, coding tips, or anything else.';
       if(/foxphantom|who is (he|the owner|this)/.test(t))
         return 'FoxPhantom203 is a creative developer who codes, builds, and ships web pages. This site is the home base.';
       if(/hello|hi\b|hey|wassup|yo\b/.test(t))
-        return 'Hey! Fox AI online. Prompt me about games, code, ideas, or how this stack works.';
+        return 'Hey! Foxor AI online. Prompt me about games, code, ideas, or how this stack works.';
       if(/fact|fun/.test(t))
         return 'Fox fact: red foxes can hear a mouse under two feet of snow from about a hundred feet away.';
       if(/project|idea|brainstorm/.test(t))
@@ -360,11 +468,11 @@
         return 'Every expert was once a beginner who kept going. Open the editor and write one more useful line.';
       if(/thank/.test(t))
         return 'Anytime. The den stays open.';
-      return 'Got your prompt. Try asking how Fox AI works, what games exist here, or for a project idea. Online models give richer answers when available.';
+      return 'Got your prompt. Try asking how Foxor AI works, what games exist here, or for a project idea. Online models give richer answers when available.';
     }
 
     async function askOnline(prompt,model){
-      const full=SYSTEM+'\n\nUser: '+prompt+'\n\nFox AI:';
+      const full=SYSTEM+'\n\nUser: '+prompt+'\n\nFoxor AI:';
       const url='https://text.pollinations.ai/'+encodeURIComponent(full)+
         '?model='+encodeURIComponent(model)+'&seed='+Date.now();
       const ctrl=new AbortController();
@@ -373,7 +481,7 @@
         const res=await fetch(url,{signal:ctrl.signal});
         clearTimeout(timer);
         if(!res.ok) throw new Error('status');
-        let text=(await res.text()).trim().replace(/^Fox AI:\s*/i,'').trim();
+        let text=(await res.text()).trim().replace(/^Foxor AI:\s*/i,'').trim();
         if(!text||text.length<3) throw new Error('empty');
         return text.slice(0,1200);
       }catch(e){
@@ -416,7 +524,7 @@
       addMsg('Chat cleared. Prompt me anytime — online model or local brain.','bot');
     });
 
-    addMsg('Hello! I am Fox AI (open source). Pick a model above, type a prompt, or try a suggestion. Games live at /games/.','bot');
+    addMsg('Hello! I am Foxor AI (open source) with enhanced features. Pick a model above, type a prompt, or try a suggestion. Games live at /games/ with 5 minigames. Try asking for code in Python, JavaScript, Rust, Go, or Java!','bot');
 
     function updateClock(){
       clock.textContent=new Date().toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'});
@@ -454,6 +562,47 @@
     avatar.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();foxClick()}});
     if(window.innerWidth>=900) setTimeout(()=>input.focus(),400);
   })();
-  </script>
+  
+    // Foxor Custom Cursor
+    const cursor = document.getElementById('foxorCursor');
+    const cursorToggle = document.getElementById('cursorToggle');
+    let cursorEnabled = false;
+    let isClicking = false;
+
+    function updateCursorPosition(e) {
+      if (!cursorEnabled) return;
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    }
+
+    function toggleCursor() {
+      cursorEnabled = !cursorEnabled;
+      if (cursorEnabled) {
+        document.body.classList.add('foxor-cursor-enabled');
+        cursorToggle.textContent = 'Hide Foxy Cursor';
+        cursor.style.display = 'flex';
+      } else {
+        document.body.classList.remove('foxor-cursor-enabled');
+        cursorToggle.textContent = 'Show Foxy Cursor';
+        cursor.style.display = 'none';
+      }
+    }
+
+    // Event listeners for cursor
+    document.addEventListener('mousemove', updateCursorPosition);
+    document.addEventListener('mousedown', () => {
+      if (cursorEnabled) {
+        isClicking = true;
+        cursor.classList.add('clicking');
+      }
+    });
+    document.addEventListener('mouseup', () => {
+      if (cursorEnabled) {
+        isClicking = false;
+        cursor.classList.remove('clicking');
+      }
+    });
+    cursorToggle.addEventListener('click', toggleCursor);
+</script>
 </body>
 </html>

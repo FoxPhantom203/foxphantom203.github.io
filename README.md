@@ -1,7 +1,5 @@
 # foxphantom203.github.io
 
-Welcome — this repository hosts my personal GitHub Pages site: https://foxphantom203.github.io
-
 This README was refreshed on 2026-10-17 to give a clean, friendly overview of the project and quick instructions for local development and updates.
 
 ## About

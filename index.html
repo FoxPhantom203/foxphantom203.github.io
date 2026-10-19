@@ -92,6 +92,70 @@
     .oss a{color:var(--accent-2);text-decoration:none}
     .oss a:hover{text-decoration:underline}
     .clock{margin-top:0.9rem;font-size:0.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+    
+    /* Windows Container */
+    .windows-container{
+      grid-column:1/-1;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    .window{
+      background:var(--surface);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 8px 24px rgba(0,0,0,0.35);
+      overflow:hidden;
+      transition:transform 0.2s,box-shadow 0.2s;
+    }
+    .window:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(255,107,53,0.25);
+      border-color:rgba(255,107,53,0.35);
+    }
+    .window-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.6rem 0.85rem;
+      background:rgba(255,107,53,0.08);
+      border-bottom:1px solid var(--border);
+    }
+    .window-title{
+      font-family:Orbitron,sans-serif;
+      font-size:0.85rem;
+      font-weight:600;
+      color:var(--accent-2);
+      letter-spacing:0.02em;
+    }
+    .window-controls{
+      display:flex;
+      gap:0.4rem;
+    }
+    .window-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--border);
+    }
+    .window-dot:nth-child(1){background:#ff5f57}
+    .window-dot:nth-child(2){background:#febc2e}
+    .window-dot:nth-child(3){background:#28c840}
+    .window-content{
+      padding:0.75rem;
+      font-size:0.8rem;
+      color:var(--muted);
+      background:rgba(255,255,255,0.02);
+    }
+    @media(max-width:600px){
+      .windows-container{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:400px){
+      .windows-container{grid-template-columns:1fr}
+    }
 
     .ai-panel{
       background:var(--surface);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
@@ -327,7 +391,7 @@
         <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="support-btn" style="background: #24292f; padding: 0.55rem; border-radius: 999px;"><svg width="18" height="18" style="fill: white;" ><use href="#icon-github-favicon"/></svg></a>
         <a class="secondary" href="games/"><svg><use href="#icon-game"/></svg> Games</a>
         <a class="secondary" href="mailto:foxphantom203@tutamail.com"><svg><use href="#icon-mail"/></svg> Email</a>
-      <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="support-btn" style="background: #163020; padding: 0.55rem; border-radius: 999px;"><svg width="18" height="18" style="fill: white;" ><use href="#icon-archive"/></svg></a></div>
+      <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="support-btn" style="background: #163020; padding: 0.55rem; border-radius: 999px;"><img src="https://www.google.com/s2/favicons?domain=metmuseum.org&sz=32" width="18" height="18" style="filter: invert(1);" alt="Museum"></a></div>
 <button type="button" class="cursor-toggle" id="cursorToggle" style="background: var(--accent); border: none; padding: 0.55rem 1.15rem; border-radius: 999px; font-weight: 600; font-size: 0.88rem; color: #fff; cursor: pointer; margin-top: 0.5rem;">Toggle Foxy Cursor</button>      <p class="oss">
         Foxor AI is <strong>open source</strong> on this site — free public models via
         <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations</a>,
@@ -336,6 +400,64 @@
       </p>
       <div class="clock" id="clock" aria-live="polite"></div>
     </aside>
+
+    <div class="windows-container">
+      <div class="window" data-window="foxor-ai">
+        <div class="window-header">
+          <span class="window-title">Foxor AI</span>
+          <div class="window-controls">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+          </div>
+        </div>
+        <div class="window-content">Open-source assistant with enhanced features</div>
+      </div>
+      <div class="window" data-window="games">
+        <div class="window-header">
+          <span class="window-title">Games</span>
+          <div class="window-controls">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+          </div>
+        </div>
+        <div class="window-content">Snake, Memory, Reaction, Clicker, Maze</div>
+      </div>
+      <div class="window" data-window="code">
+        <div class="window-header">
+          <span class="window-title">Code Samples</span>
+          <div class="window-controls">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+          </div>
+        </div>
+        <div class="window-content">Python, JavaScript, Rust, Go, Java</div>
+      </div>
+      <div class="window" data-window="projects">
+        <div class="window-header">
+          <span class="window-title">Projects</span>
+          <div class="window-controls">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+          </div>
+        </div>
+        <div class="window-content">Web pages and creative builds</div>
+      </div>
+      <div class="window" data-window="about">
+        <div class="window-header">
+          <span class="window-title">About</span>
+          <div class="window-controls">
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+            <span class="window-dot"></span>
+          </div>
+        </div>
+        <div class="window-content">FoxPhantom203's creative portfolio</div>
+      </div>
+    </div>
 
     <section class="ai-panel" aria-label="Foxor AI chatbot">
       <div class="ai-header">

@@ -150,11 +150,88 @@
       color:var(--muted);
       background:rgba(255,255,255,0.02);
     }
-    @media(max-width:600px){
-      .windows-container{grid-template-columns:repeat(2,1fr)}
+    
+    /* Widget Container - Scrollable Merged Widget */
+    .widget-container{
+      grid-column:1/-1;
+      background:var(--surface);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 20px 50px rgba(0,0,0,0.45);
+      margin-top:1rem;
+      max-width:100%;
+      overflow:hidden;
+    }
+    .widget-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.85rem 1.15rem;
+      border-bottom:1px solid var(--border);
+      background:rgba(255,107,53,0.06);
+    }
+    .widget-title{
+      font-family:Orbitron,sans-serif;
+      font-size:1rem;
+      font-weight:600;
+      color:var(--accent-2);
+      letter-spacing:0.02em;
+    }
+    .widget-nav{
+      display:flex;
+      gap:0.5rem;
+    }
+    .widget-nav-btn{
+      width:28px;height:28px;
+      border-radius:50%;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:1rem;
+      cursor:pointer;
+      transition:all 0.15s;
+      display:grid;place-items:center;
+    }
+    .widget-nav-btn:hover{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+    }
+    .widget-nav-btn:active{
+      transform:scale(0.95);
+    }
+    .widget-scroll{
+      display:flex;
+      gap:1rem;
+      padding:1rem;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .widget-scroll::-webkit-scrollbar{
+      display:none;
+    }
+    .widget-scroll > .window{
+      flex:0 0 calc(33.333% - 0.666rem);
+      min-width:180px;
+      scroll-snap-align:start;
+    }
+    .widget-scroll > .window:nth-child(6){
+      margin-right:1rem;
+    }
+    @media(max-width:1200px){
+      .widget-scroll > .window{flex:0 0 calc(50% - 0.5rem)}
+    }
+    @media(max-width:800px){
+      .widget-scroll > .window{flex:0 0 calc(100% - 0rem)}
     }
     @media(max-width:400px){
-      .windows-container{grid-template-columns:1fr}
+      .widget-scroll > .window{min-width:160px}
     }
 
     .ai-panel{
@@ -401,61 +478,81 @@
       <div class="clock" id="clock" aria-live="polite"></div>
     </aside>
 
-    <div class="windows-container">
-      <div class="window" data-window="foxor-ai">
-        <div class="window-header">
-          <span class="window-title">Foxor AI</span>
-          <div class="window-controls">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-          </div>
+    <div class="widget-container">
+      <div class="widget-header">
+        <span class="widget-title">Foxor AI Widgets</span>
+        <div class="widget-nav">
+          <button class="widget-nav-btn prev" aria-label="Previous">‹</button>
+          <button class="widget-nav-btn next" aria-label="Next">›</button>
         </div>
-        <div class="window-content">Open-source assistant with enhanced features</div>
       </div>
-      <div class="window" data-window="games">
-        <div class="window-header">
-          <span class="window-title">Games</span>
-          <div class="window-controls">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
+      <div class="widget-scroll">
+        <div class="window" data-window="foxor-ai">
+          <div class="window-header">
+            <span class="window-title">Foxor AI</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
           </div>
+          <div class="window-content">Open-source assistant with enhanced features</div>
         </div>
-        <div class="window-content">Snake, Memory, Reaction, Clicker, Maze</div>
-      </div>
-      <div class="window" data-window="code">
-        <div class="window-header">
-          <span class="window-title">Code Samples</span>
-          <div class="window-controls">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
+        <div class="window" data-window="games">
+          <div class="window-header">
+            <span class="window-title">Games</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
           </div>
+          <div class="window-content">Snake, Memory, Reaction, Clicker, Maze</div>
         </div>
-        <div class="window-content">Python, JavaScript, Rust, Go, Java</div>
-      </div>
-      <div class="window" data-window="projects">
-        <div class="window-header">
-          <span class="window-title">Projects</span>
-          <div class="window-controls">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
+        <div class="window" data-window="code">
+          <div class="window-header">
+            <span class="window-title">Code Samples</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
           </div>
+          <div class="window-content">Python, JavaScript, Rust, Go, Java</div>
         </div>
-        <div class="window-content">Web pages and creative builds</div>
-      </div>
-      <div class="window" data-window="about">
-        <div class="window-header">
-          <span class="window-title">About</span>
-          <div class="window-controls">
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
-            <span class="window-dot"></span>
+        <div class="window" data-window="projects">
+          <div class="window-header">
+            <span class="window-title">Projects</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
           </div>
+          <div class="window-content">Web pages and creative builds</div>
         </div>
-        <div class="window-content">FoxPhantom203's creative portfolio</div>
+        <div class="window" data-window="about">
+          <div class="window-header">
+            <span class="window-title">About</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
+          </div>
+          <div class="window-content">FoxPhantom203's creative portfolio</div>
+        </div>
+        <div class="window" data-window="contact">
+          <div class="window-header">
+            <span class="window-title">Contact</span>
+            <div class="window-controls">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+            </div>
+          </div>
+          <div class="window-content">Email & GitHub for collaboration</div>
+        </div>
       </div>
     </div>
 
@@ -730,6 +827,33 @@
       }
     });
     cursorToggle.addEventListener('click', toggleCursor);
+
+    // Widget scroll navigation
+    const widgetScroll = document.querySelector('.widget-scroll');
+    const prevBtn = document.querySelector('.widget-nav-btn.prev');
+    const nextBtn = document.querySelector('.widget-nav-btn.next');
+
+    if (widgetScroll && prevBtn && nextBtn) {
+      const scrollAmount = 200;
+      prevBtn.addEventListener('click', () => {
+        widgetScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        widgetScroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      // Show/hide navigation buttons based on scroll position
+      function updateNavButtons() {
+        prevBtn.style.opacity = widgetScroll.scrollLeft > 10 ? '1' : '0.3';
+        prevBtn.style.pointerEvents = widgetScroll.scrollLeft > 10 ? 'auto' : 'none';
+        nextBtn.style.opacity = widgetScroll.scrollLeft < (widgetScroll.scrollWidth - widgetScroll.clientWidth - 10) ? '1' : '0.3';
+        nextBtn.style.pointerEvents = widgetScroll.scrollLeft < (widgetScroll.scrollWidth - widgetScroll.clientWidth - 10) ? 'auto' : 'none';
+      }
+
+      widgetScroll.addEventListener('scroll', updateNavButtons);
+      window.addEventListener('resize', updateNavButtons);
+      updateNavButtons();
+    }
 </script>
 </body>
 </html>

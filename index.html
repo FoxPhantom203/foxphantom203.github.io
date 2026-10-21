@@ -2,11 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0;url=https://foxphantom203-two.vercel.app">
-<title>Redirecting…</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FoxPhantom203 — Creative fox portfolio with Foxor AI widgets.">
+<title>FoxPhantom203 | Foxor AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<p>Loading portfolio… If you are not redirected, <a href="https://foxphantom203-two.vercel.app">open the Vercel version</a>.</p>
-<script>location.replace('https://foxphantom203-two.vercel.app');</script>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="orb orb-3" aria-hidden="true"></div>
+<div class="page">
+  <aside class="profile">
+    <div class="deco-row" aria-hidden="true">✦ 🦊 ✦</div>
+    <div class="avatar-wrap" id="avatar" role="button" tabindex="0" aria-label="Fox avatar">🦊</div>
+    <h1>FoxPhantom203</h1>
+    <p class="tagline">Creative fox · coding & building</p>
+    <p class="bio">Wassup! Making pages and shipping projects. Welcome to my corner of the internet.</p>
+    <div class="links">
+      <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener">GitHub</a>
+      <a class="secondary" href="games/">Games</a>
+      <a class="secondary" href="mailto:foxphantom203@tutamail.com">Email</a>
+    </div>
+    <button type="button" class="cursor-toggle" id="cursorToggle">Toggle Foxy Cursor</button>
+    <p class="oss">Foxor AI is <strong>open source</strong> on this site. Fork the <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" target="_blank" rel="noopener">repo</a>.</p>
+    <div class="clock" id="clock"></div>
+  </aside>
+  <div class="widget-container">
+    <div class="widget-header">
+      <span class="widget-title">Foxor AI Widgets</span>
+      <div class="widget-nav">
+        <button class="widget-nav-btn prev" aria-label="Previous">‹</button>
+        <button class="widget-nav-btn next" aria-label="Next">›</button>
+      </div>
+    </div>
+    <div class="widget-scroll">
+      <div class="window material-window"><div class="window-header material-header"><span class="window-title">Foxor AI</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content material-content">Chat with Foxor AI — open-source assistant</div></div>
+      <div class="window"><div class="window-header"><span class="window-title">Games</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Snake, Memory, Reaction, Clicker, Maze</div></div>
+      <div class="window"><div class="window-header"><span class="window-title">Code Samples</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Python, JavaScript, Rust, Go, Java</div></div>
+      <div class="window"><div class="window-header"><span class="window-title">Projects</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Web pages and creative builds</div></div>
+      <div class="window"><div class="window-header"><span class="window-title">About</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">FoxPhantom203 creative portfolio</div></div>
+      <div class="window"><div class="window-header"><span class="window-title">Contact</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Email & GitHub for collaboration</div></div>
+    </div>
+  </div>
+  <div class="switch-vercel-wrap">
+    <a class="switch-vercel-btn" id="switchVercel" href="https://foxphantom203-two.vercel.app" target="_blank" rel="noopener noreferrer">
+      <svg class="vercel-mark" viewBox="0 0 76 65" aria-hidden="true"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z"/></svg>
+      Switch To Vercel
+    </a>
+  </div>
+  <footer>
+    <a href="games/">Games</a> ·
+    <a href="https://github.com/FoxPhantom203/foxphantom203.github.io">Source</a> ·
+    foxphantom203.github.io
+  </footer>
+</div>
+<script src="app.js"></script>
 </body>
 </html>

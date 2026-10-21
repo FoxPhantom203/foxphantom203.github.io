@@ -151,6 +151,198 @@
       background:rgba(255,255,255,0.02);
     }
     
+    /* Material You Theme for Widget */
+    .widget-container{
+      background:var(--surface-2);
+      border:1px solid rgba(255,107,53,0.2);
+      border-radius:var(--radius);
+      box-shadow:0 4px 20px rgba(255,107,53,0.15);
+    }
+    .widget-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0.85rem 1.15rem;
+      border-bottom:1px solid rgba(255,107,53,0.2);
+      background:rgba(255,107,53,0.12);
+    }
+    .widget-title{
+      font-family:Orbitron,sans-serif;
+      font-size:1rem;
+      font-weight:600;
+      color:var(--accent-2);
+      letter-spacing:0.02em;
+    }
+    .widget-nav{
+      display:flex;
+      gap:0.5rem;
+    }
+    .widget-nav-btn{
+      width:28px;height:28px;
+      border-radius:50%;
+      border:1px solid rgba(255,107,53,0.3);
+      background:rgba(255,255,255,0.06);
+      color:var(--muted);
+      font-size:1rem;
+      cursor:pointer;
+      transition:all 0.15s;
+      display:grid;place-items:center;
+    }
+    .widget-nav-btn:hover{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#fff;
+    }
+    .widget-scroll{
+      display:flex;
+      gap:1rem;
+      padding:1rem;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .widget-scroll::-webkit-scrollbar{display:none}
+    .widget-scroll > .window{flex:0 0 calc(33.333% - 0.666rem);min-width:180px;scroll-snap-align:start}
+    .widget-scroll > .window:nth-child(6){margin-right:1rem}
+    @media(max-width:1200px){.widget-scroll > .window{flex:0 0 calc(50% - 0.5rem)}}
+    @media(max-width:800px){.widget-scroll > .window{flex:0 0 calc(100% - 0rem)}}
+    @media(max-width:400px){.widget-scroll > .window{min-width:160px}}
+    
+    /* Material You Window */
+    .window.material-window{
+      background:var(--surface-2);
+      border:1px solid rgba(255,107,53,0.2);
+      box-shadow:0 4px 20px rgba(255,107,53,0.15);
+    }
+    .window-header.material-header{
+      background:rgba(255,107,53,0.12);
+      border-bottom:1px solid rgba(255,107,53,0.2);
+    }
+    .window-content.material-content{
+      padding:0.5rem;
+      background:rgba(255,255,255,0.02);
+    }
+    .material-toolbar{
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:0.5rem 0;
+      flex-wrap:wrap;
+    }
+    .material-toolbar label{
+      font-size:0.72rem;
+      color:var(--muted);
+    }
+    .material-toolbar select.material-select{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,107,53,0.3);
+      border-radius:8px;
+      color:var(--text);
+      font-size:0.75rem;
+      padding:0.3rem 0.5rem;
+      font-family:inherit;
+      outline:none;
+      flex:1;
+      min-width:120px;
+    }
+    .material-toolbar select.material-select:focus{
+      border-color:var(--accent);
+      outline:none;
+    }
+    .clear.material-button{
+      background:rgba(255,107,53,0.15);
+      border:1px solid rgba(255,107,53,0.3);
+      color:var(--accent-2);
+      border-radius:8px;
+      padding:0.3rem 0.6rem;
+      font-size:0.72rem;
+      cursor:pointer;
+      font-family:inherit;
+      white-space:nowrap;
+    }
+    .clear.material-button:hover{
+      background:rgba(255,107,53,0.25);
+      border-color:var(--accent);
+    }
+    .chat.material-chat{
+      max-height:180px;
+      overflow-y:auto;
+      padding:0.5rem 0;
+      margin:0.5rem 0;
+    }
+    .suggestions.material-suggestions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.4rem;
+      padding:0.5rem 0;
+    }
+    .suggestions button.material-chip{
+      background:rgba(255,107,53,0.15);
+      border:1px solid rgba(255,107,53,0.3);
+      color:var(--accent-2);
+      padding:0.35rem 0.7rem;
+      border-radius:999px;
+      font-size:0.72rem;
+      font-weight:500;
+      cursor:pointer;
+      transition:all 0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .suggestions button.material-chip:hover{
+      background:rgba(255,107,53,0.25);
+      border-color:var(--accent);
+      color:#fff;
+      transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(255,107,53,0.25);
+    }
+    .composer.material-composer{
+      display:flex;
+      gap:0.55rem;
+      padding:0.5rem 0;
+    }
+    .composer input.material-input{
+      flex:1;
+      min-width:0;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,107,53,0.2);
+      border-radius:999px;
+      padding:0.45rem 0.8rem;
+      color:var(--text);
+      font-size:0.8rem;
+      font-family:inherit;
+      outline:none;
+    }
+    .composer input.material-input::placeholder{color:var(--muted)}
+    .composer input.material-input:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(255,107,53,0.15);
+      outline:none;
+    }
+    .composer button.material-send{
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:none;
+      background:linear-gradient(135deg,var(--accent),#ff8c42);
+      color:#fff;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+      transition:transform 0.15s,box-shadow 0.15s;
+      box-shadow:0 4px 12px rgba(255,107,53,0.35);
+    }
+    .composer button.material-send svg{width:14px;height:14px}
+    .composer button.material-send:hover{
+      transform:scale(1.06);
+      box-shadow:0 6px 16px rgba(255,107,53,0.5);
+    }
+    .msg.bot:hover{
+      background:rgba(255,255,255,0.08);
+      border-color:rgba(255,107,53,0.2);
+    }
     /* Widget Container - Scrollable Merged Widget */
     .widget-container{
       grid-column:1/-1;
@@ -234,97 +426,7 @@
       .widget-scroll > .window{min-width:160px}
     }
 
-    .ai-panel{
-      background:var(--surface);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-      border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 20px 50px rgba(0,0,0,0.45);
-      display:flex;flex-direction:column;min-height:440px;max-height:min(680px,82dvh);overflow:hidden;
-    }
-    .ai-header{
-      display:flex;align-items:center;gap:0.75rem;padding:0.9rem 1.15rem;
-      border-bottom:1px solid var(--border);background:rgba(255,107,53,0.06);flex-shrink:0;
-    }
-    .ai-header-icon{
-      width:40px;height:40px;border-radius:12px;background:rgba(255,107,53,0.15);
-      border:1px solid rgba(255,107,53,0.35);display:grid;place-items:center;
-    }
-    .ai-header-icon svg{width:24px;height:24px}
-    .ai-header h2{font-family:Orbitron,sans-serif;font-size:1rem;font-weight:600}
-    .ai-header p{font-size:0.72rem;color:var(--muted)}
-    .status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e;margin-left:auto;flex-shrink:0}
-    .status-dot.busy{background:#fbbf24;box-shadow:0 0 8px #fbbf24;animation:blink 1s infinite}
-    @keyframes blink{50%{opacity:0.4}}
-
-    .toolbar{
-      display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;
-      border-bottom:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;
-    }
-    .toolbar label{font-size:0.72rem;color:var(--muted)}
-    .toolbar select{
-      background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;
-      color:var(--text);font-size:0.75rem;padding:0.3rem 0.5rem;font-family:inherit;outline:none;
-    }
-    .toolbar select:focus{border-color:rgba(255,107,53,0.5)}
-    .toolbar .clear{
-      margin-left:auto;font-size:0.72rem;background:none;border:1px solid var(--border);
-      color:var(--muted);border-radius:8px;padding:0.3rem 0.6rem;cursor:pointer;font-family:inherit;
-    }
-    .toolbar .clear:hover{color:var(--accent);border-color:var(--accent)}
-
-    .chat{flex:1;overflow-y:auto;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:0.85rem;scroll-behavior:smooth}
-    .chat::-webkit-scrollbar{width:6px}
-    .chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:99px}
-    .msg{max-width:92%;padding:0.7rem 0.95rem;border-radius:1rem;font-size:0.9rem;line-height:1.5;animation:msgIn 0.25s ease}
-    @keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-    .msg.bot{align-self:flex-start;background:var(--surface-2);border:1px solid var(--border);border-bottom-left-radius:0.3rem}
-    .msg.user{align-self:flex-end;background:linear-gradient(135deg,#ff6b35,#e85d04);color:#fff;border-bottom-right-radius:0.3rem}
-    .msg .label{display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;font-weight:600;margin-bottom:0.3rem;opacity:0.85}
-    .msg .label svg{width:14px;height:14px}
-    .msg.bot .label{color:var(--accent-2)}
-    .msg .body{white-space:pre-wrap;word-break:break-word}
-    .msg .cursor{display:inline-block;width:2px;height:1em;background:var(--accent-2);margin-left:1px;vertical-align:text-bottom;animation:blink 0.8s infinite}
-    .typing{display:inline-flex;gap:4px;padding:0.2rem 0}
-    .typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bounce 1.2s infinite ease-in-out}
-    .typing span:nth-child(2){animation-delay:0.15s}
-    .typing span:nth-child(3){animation-delay:0.3s}
-    @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:0.4}40%{transform:translateY(-5px);opacity:1}}
-
-    .suggestions{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0 1.15rem 0.65rem;flex-shrink:0}
-    .suggestions button{
-      font-size:0.72rem;padding:0.35rem 0.7rem;border-radius:999px;border:1px solid var(--border);
-      background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-family:inherit;
-      transition:border-color 0.15s,color 0.15s,background 0.15s;
-    }
-    .suggestions button:hover{border-color:var(--accent);color:var(--accent);background:rgba(255,107,53,0.08)}
-
-    .composer{display:flex;gap:0.55rem;padding:0.85rem 1.1rem;border-top:1px solid var(--border);background:rgba(0,0,0,0.2);flex-shrink:0}
-    .composer input{
-      flex:1;min-width:0;background:rgba(255,255,255,0.06);border:1px solid var(--border);
-      border-radius:999px;padding:0.65rem 1.1rem;color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;
-    }
-    .composer input::placeholder{color:var(--muted)}
-    .composer input:focus{border-color:rgba(255,107,53,0.5);box-shadow:0 0 0 3px rgba(255,107,53,0.15)}
-    .composer button{
-      width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;
-      cursor:pointer;display:grid;place-items:center;flex-shrink:0;
-      transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 12px rgba(255,107,53,0.35);
-    }
-    .composer button svg{width:18px;height:18px}
-    .composer button:hover{transform:scale(1.06)}
-    .composer button:disabled{opacity:0.5;cursor:not-allowed;transform:none}
-
-    footer{grid-column:1/-1;text-align:center;color:var(--muted);font-size:0.78rem;padding-top:0.25rem}
-    footer a{color:var(--accent-2);text-decoration:none}
-    #particles{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
-    .toast{
-      position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);
-      background:rgba(22,22,30,0.96);color:#fff;padding:0.6rem 1.2rem;border-radius:999px;
-      font-size:0.85rem;border:1px solid rgba(255,107,53,0.4);z-index:100;opacity:0;
-      pointer-events:none;transition:transform 0.35s cubic-bezier(0.22,1,0.36,1),opacity 0.35s;white-space:nowrap;
-    }
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-    @media(prefers-reduced-motion:reduce){.orb,.avatar-wrap{animation:none!important}.msg{animation:none}}
-    @media(max-width:480px){.ai-panel{min-height:360px;max-height:70dvh}.profile{padding:1.5rem 1.25rem}}
-  
     /* Foxor AI Custom Cursor - Rodless Pointer (Circle Only) */
     body.foxor-cursor-enabled {
       cursor: none !important;
@@ -487,8 +589,8 @@
         </div>
       </div>
       <div class="widget-scroll">
-        <div class="window" data-window="foxor-ai">
-          <div class="window-header">
+        <div class="window material-window" data-window="foxor-ai">
+          <div class="window-header material-header">
             <span class="window-title">Foxor AI</span>
             <div class="window-controls">
               <span class="window-dot"></span>
@@ -496,7 +598,27 @@
               <span class="window-dot"></span>
             </div>
           </div>
-          <div class="window-content">Open-source assistant with enhanced features</div>
+          <div class="window-content material-content">
+            <div class="material-toolbar">
+              <label for="model">Model</label>
+              <select id="model" aria-label="AI model" class="material-select">
+                <option value="openai">Online - OpenAI</option>
+                <option value="mistral">Online - Mistral</option>
+                <option value="local">Local fallback</option>
+              </select>
+              <button type="button" class="clear material-button" id="clearChat">Clear</button>
+            </div>
+            <div class="chat material-chat" id="chat" role="log" aria-live="polite"></div>
+            <div class="suggestions material-suggestions" id="suggestions">
+              <button type="button" data-q="Who is FoxPhantom203?" class="material-chip">Who is FoxPhantom203?</button>
+              <button type="button" data-q="Tell me a fun fox fact" class="material-chip">Fox fact</button>
+              <button type="button" data-q="Suggest a weekend coding project" class="material-chip">Project idea</button>
+            </div>
+            <form class="composer material-composer" id="composer">
+              <input type="text" id="prompt" placeholder="Prompt Foxor AI" autocomplete="off" maxlength="600" aria-label="Your prompt" class="material-input">
+              <button type="submit" id="sendBtn" aria-label="Send" class="material-send"><svg><use href="#icon-send"/></svg></button>
+            </form>
+          </div>
         </div>
         <div class="window" data-window="games">
           <div class="window-header">
@@ -556,41 +678,7 @@
       </div>
     </div>
 
-    <section class="ai-panel" aria-label="Foxor AI chatbot">
-      <div class="ai-header">
-        <div class="ai-header-icon"><svg><use href="#icon-fox"/></svg></div>
-        <div>
-          <h2>Foxor AI</h2>
-          <p>Open-source · type a prompt</p>
-        </div>
-        <div class="status-dot" id="status" title="Ready"></div>
-      </div>
-
-      <div class="toolbar">
-        <label for="model">Model</label>
-        <select id="model" aria-label="AI model">
-          <option value="openai">Online · OpenAI-compat</option>
-          <option value="mistral">Online · Mistral</option>
-          <option value="local">Local fallback only</option>
-        </select>
-        <button type="button" class="clear" id="clearChat">Clear chat</button>
-      </div>
-
-      <div class="chat" id="chat" role="log" aria-live="polite"></div>
-
-      <div class="suggestions" id="suggestions">
-        <button type="button" data-q="Who is FoxPhantom203?">Who is FoxPhantom203?</button>
-        <button type="button" data-q="Tell me a fun fox fact">Fox fact</button>
-        <button type="button" data-q="Suggest a weekend coding project">Project idea</button>
-        <button type="button" data-q="What games are on this site?">Games?</button>
-        <button type="button" data-q="Explain how Foxor AI works">How Foxor AI works</button>
-      </div>
-
-      <form class="composer" id="composer">
-        <input type="text" id="prompt" placeholder="Prompt Foxor AI…" autocomplete="off" maxlength="600" aria-label="Your prompt">
-        <button type="submit" id="sendBtn" aria-label="Send"><svg><use href="#icon-send"/></svg></button>
-      </form>
-    </section>
+    >
 
     <footer>
       <a href="games/">Games</a> ·
@@ -826,7 +914,34 @@
         cursor.classList.remove('clicking');
       }
     });
-    cursorToggle.addEventListener('click', toggleCursor);
+    
+    // Widget scroll navigation
+    const widgetScroll = document.querySelector('.widget-scroll');
+    const prevBtn = document.querySelector('.widget-nav-btn.prev');
+    const nextBtn = document.querySelector('.widget-nav-btn.next');
+
+    if (widgetScroll && prevBtn && nextBtn) {
+      const scrollAmount = 200;
+      prevBtn.addEventListener('click', () => {
+        widgetScroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        widgetScroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      function updateNavButtons() {
+        prevBtn.style.opacity = widgetScroll.scrollLeft > 10 ? '1' : '0.3';
+        prevBtn.style.pointerEvents = widgetScroll.scrollLeft > 10 ? 'auto' : 'none';
+        nextBtn.style.opacity = widgetScroll.scrollLeft < (widgetScroll.scrollWidth - widgetScroll.clientWidth - 10) ? '1' : '0.3';
+        nextBtn.style.pointerEvents = widgetScroll.scrollLeft < (widgetScroll.scrollWidth - widgetScroll.clientWidth - 10) ? 'auto' : 'none';
+      }
+
+      widgetScroll.addEventListener('scroll', updateNavButtons);
+      window.addEventListener('resize', updateNavButtons);
+      updateNavButtons();
+    }
+
+cursorToggle.addEventListener('click', toggleCursor);
 
     // Widget scroll navigation
     const widgetScroll = document.querySelector('.widget-scroll');

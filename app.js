@@ -43,7 +43,7 @@
   const styleSelect = document.getElementById('styleSelect');
   const STYLE_KEY = 'foxphantom-style';
   function applyStyle(name) {
-    const valid = ['default', 'playful', 'scifi'];
+    const valid = ['default', 'playful', 'scifi', 'voxel', 'aurora'];
     const style = valid.includes(name) ? name : 'default';
     document.body.setAttribute('data-style', style);
     if (styleSelect) styleSelect.value = style;
@@ -58,7 +58,7 @@
     });
   }
 
-  /* Packed links — hover opens via CSS; click/touch toggles .is-open for mobile */
+  /* Packed links — hover via CSS; click/touch toggles .is-open for mobile */
   const packedLinks = document.getElementById('packedLinks');
   const packedBtn = document.getElementById('packedBtn');
   if (packedLinks && packedBtn) {

@@ -49,6 +49,53 @@
     repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,240,255,0.03) 2px,rgba(0,240,255,0.03) 4px);
 }
 
+/* ========== VOXEL (Minecraft-like) ========== */
+[data-style="voxel"] {
+  --bg:#1a1a1a;
+  --surface:rgba(55,48,40,0.95);
+  --surface-2:rgba(70,60,48,0.98);
+  --text:#e8e0d0;
+  --muted:#a09070;
+  --accent:#55c040;
+  --accent-2:#c4a000;
+  --border:rgba(0,0,0,0.45);
+  --radius:0;
+  --font-main:"Press Start 2P",monospace;
+  --font-display:"Press Start 2P",monospace;
+  --orb-1:#55c040;
+  --orb-2:#8b5a2b;
+  --orb-3:#3a7d2a;
+  --bg-image:
+    linear-gradient(180deg, rgba(26,26,26,0.85) 0%, rgba(40,55,30,0.7) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 16px),
+    repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 16px),
+    linear-gradient(180deg, #87CEEB 0%, #87CEEB 35%, #7ec850 35%, #5a9a3a 70%, #3d6b28 100%);
+}
+
+/* ========== AURORA (northern lights) ========== */
+[data-style="aurora"] {
+  --bg:#0a0e1a;
+  --surface:rgba(12,18,32,0.9);
+  --surface-2:rgba(18,28,48,0.95);
+  --text:#e0f0ff;
+  --muted:#7a9ab8;
+  --accent:#5ef0c8;
+  --accent-2:#c47bff;
+  --border:rgba(94,240,200,0.2);
+  --radius:1.1rem;
+  --font-main:Inter,system-ui,sans-serif;
+  --font-display:Orbitron,sans-serif;
+  --orb-1:#5ef0c8;
+  --orb-2:#c47bff;
+  --orb-3:#4a9fff;
+  --bg-image:
+    linear-gradient(165deg, rgba(10,14,26,0.88) 0%, rgba(20,10,40,0.75) 40%, rgba(5,30,40,0.85) 100%),
+    radial-gradient(ellipse 80% 50% at 20% 20%, rgba(94,240,200,0.25), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(196,123,255,0.2), transparent),
+    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(74,159,255,0.15), transparent),
+    linear-gradient(180deg, #0a0e1a, #0d1528);
+}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{height:100%;scroll-behavior:smooth}
 body{
@@ -108,25 +155,30 @@ h1{
 }
 .style-select:hover,.style-select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)}
 
-/* Packed links — closed by default, open on hover (smooth) */
+/* Packed links — fixed top-left corner of the page */
 .packed-links{
-  position:relative;
-  width:100%;
-  max-width:240px;
-  margin-bottom:1.1rem;
+  position:fixed;
+  top:1rem;
+  left:1rem;
+  z-index:100;
+  width:auto;
+  min-width:120px;
+  max-width:220px;
 }
 .packed-btn{
   width:100%;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
-  padding:0.6rem 1.1rem;border-radius:999px;border:1px solid var(--border);
-  background:var(--surface-2);color:var(--text);font-family:var(--font-main);font-weight:600;font-size:0.88rem;
-  cursor:pointer;transition:transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  padding:0.55rem 1rem;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:var(--text);font-family:var(--font-main);font-weight:600;font-size:0.85rem;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  transition:transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 .packed-btn:hover,
 .packed-links:hover .packed-btn,
 .packed-links:focus-within .packed-btn{
   border-color:var(--accent);
-  box-shadow:0 4px 16px color-mix(in srgb, var(--accent) 25%, transparent);
-  background:color-mix(in srgb, var(--accent) 10%, var(--surface-2));
+  box-shadow:0 8px 28px color-mix(in srgb, var(--accent) 30%, transparent);
+  background:color-mix(in srgb, var(--accent) 12%, var(--surface));
 }
 .packed-chevron{
   font-size:0.75rem;
@@ -138,34 +190,33 @@ h1{
   transform:rotate(180deg);
 }
 
-/* Menu: always in DOM, animated via opacity/transform (no display:none for smooth close) */
 .packed-menu{
   position:absolute;
-  top:calc(100% + 0.35rem);
+  top:calc(100% + 0.4rem);
   left:0;
-  right:0;
-  z-index:20;
+  min-width:220px;
+  z-index:101;
   background:var(--surface);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   border:1px solid var(--border);
   border-radius:1rem;
-  box-shadow:0 16px 40px rgba(0,0,0,0.45);
+  box-shadow:0 16px 40px rgba(0,0,0,0.5);
   padding:0.4rem;
   display:flex;
   flex-direction:column;
   gap:0.15rem;
-  /* closed state */
   opacity:0;
   visibility:hidden;
   pointer-events:none;
   transform:translateY(-8px) scale(0.97);
-  transform-origin:top center;
+  transform-origin:top left;
   transition:
     opacity 0.28s cubic-bezier(0.4,0,0.2,1),
     transform 0.32s cubic-bezier(0.34,1.2,0.64,1),
     visibility 0.28s,
     box-shadow 0.3s;
 }
-/* open on hover / focus-within / JS class */
 .packed-links:hover .packed-menu,
 .packed-links:focus-within .packed-menu,
 .packed-links.is-open .packed-menu{
@@ -173,7 +224,7 @@ h1{
   visibility:visible;
   pointer-events:auto;
   transform:translateY(0) scale(1);
-  box-shadow:0 20px 48px rgba(0,0,0,0.5), 0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
+  box-shadow:0 20px 48px rgba(0,0,0,0.55), 0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
 }
 
 .packed-item{
@@ -183,7 +234,6 @@ h1{
   transform:translateY(-4px);
   transition:background 0.2s, opacity 0.25s ease, transform 0.25s ease;
 }
-/* stagger children when open */
 .packed-links:hover .packed-item,
 .packed-links:focus-within .packed-item,
 .packed-links.is-open .packed-item{
@@ -293,3 +343,69 @@ footer a:hover{text-decoration:underline}
 [data-style="scifi"] .window-dot{border-radius:1px}
 [data-style="scifi"] .packed-btn,[data-style="scifi"] .style-select,[data-style="scifi"] .links a{border-radius:0.25rem}
 [data-style="scifi"] .avatar-wrap{border-radius:0.35rem;border-width:1px}
+
+/* Voxel extras — hard edges, pixel font scale */
+[data-style="voxel"] {
+  image-rendering: pixelated;
+}
+[data-style="voxel"] .orb{opacity:0.2;filter:blur(40px);border-radius:0}
+[data-style="voxel"] .profile,
+[data-style="voxel"] .widget-container,
+[data-style="voxel"] .window,
+[data-style="voxel"] .packed-btn,
+[data-style="voxel"] .packed-menu,
+[data-style="voxel"] .style-select,
+[data-style="voxel"] .links a{
+  border-radius:0;
+  border-width:3px;
+  border-style:solid;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.5);
+}
+[data-style="voxel"] .avatar-wrap{
+  border-radius:0;
+  border-width:3px;
+  box-shadow:4px 4px 0 rgba(0,0,0,0.4);
+}
+[data-style="voxel"] h1{
+  font-size:clamp(0.7rem,1.8vw,0.95rem);
+  letter-spacing:0.05em;
+  line-height:1.4;
+  -webkit-text-fill-color:var(--accent);
+  background:none;
+  text-shadow:2px 2px 0 #000;
+}
+[data-style="voxel"] .tagline,
+[data-style="voxel"] .bio,
+[data-style="voxel"] .window-content,
+[data-style="voxel"] .oss,
+[data-style="voxel"] .clock,
+[data-style="voxel"] .styles-label{
+  font-size:0.55rem;
+  line-height:1.6;
+}
+[data-style="voxel"] .style-select,
+[data-style="voxel"] .packed-btn,
+[data-style="voxel"] .links a,
+[data-style="voxel"] .cursor-toggle,
+[data-style="voxel"] .window-title,
+[data-style="voxel"] .widget-title{
+  font-size:0.55rem;
+}
+[data-style="voxel"] .packed-item strong{font-size:0.5rem}
+[data-style="voxel"] .packed-item small{font-size:0.4rem}
+[data-style="voxel"] .window-dot{border-radius:0;width:10px;height:10px}
+[data-style="voxel"] .switch-vercel-btn{border-radius:0;font-size:0.55rem}
+
+/* Aurora extras */
+[data-style="aurora"] .orb{opacity:0.35;filter:blur(90px)}
+[data-style="aurora"] .profile,
+[data-style="aurora"] .widget-container,
+[data-style="aurora"] .window{
+  box-shadow:0 0 40px rgba(94,240,200,0.08), 0 12px 40px rgba(0,0,0,0.4);
+}
+[data-style="aurora"] h1{
+  text-shadow:0 0 24px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+[data-style="aurora"] .avatar-wrap{
+  box-shadow:0 0 32px color-mix(in srgb, var(--accent) 40%, transparent), 0 0 60px color-mix(in srgb, var(--accent-2) 20%, transparent);
+}

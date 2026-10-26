@@ -108,29 +108,104 @@ h1{
 }
 .style-select:hover,.style-select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent)}
 
-/* Packed links button */
-.packed-links{position:relative;width:100%;max-width:240px;margin-bottom:1.1rem}
+/* Packed links — closed by default, open on hover (smooth) */
+.packed-links{
+  position:relative;
+  width:100%;
+  max-width:240px;
+  margin-bottom:1.1rem;
+}
 .packed-btn{
   width:100%;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
   padding:0.6rem 1.1rem;border-radius:999px;border:1px solid var(--border);
   background:var(--surface-2);color:var(--text);font-family:var(--font-main);font-weight:600;font-size:0.88rem;
-  cursor:pointer;transition:transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+  cursor:pointer;transition:transform 0.25s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
-.packed-btn:hover{border-color:var(--accent);box-shadow:0 4px 16px color-mix(in srgb, var(--accent) 25%, transparent)}
-.packed-btn[aria-expanded="true"]{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 12%, var(--surface-2))}
-.packed-chevron{font-size:0.75rem;transition:transform 0.2s}
-.packed-btn[aria-expanded="true"] .packed-chevron{transform:rotate(180deg)}
+.packed-btn:hover,
+.packed-links:hover .packed-btn,
+.packed-links:focus-within .packed-btn{
+  border-color:var(--accent);
+  box-shadow:0 4px 16px color-mix(in srgb, var(--accent) 25%, transparent);
+  background:color-mix(in srgb, var(--accent) 10%, var(--surface-2));
+}
+.packed-chevron{
+  font-size:0.75rem;
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.packed-links:hover .packed-chevron,
+.packed-links:focus-within .packed-chevron,
+.packed-links.is-open .packed-chevron{
+  transform:rotate(180deg);
+}
+
+/* Menu: always in DOM, animated via opacity/transform (no display:none for smooth close) */
 .packed-menu{
-  position:absolute;top:calc(100% + 0.4rem);left:0;right:0;z-index:20;
-  background:var(--surface);border:1px solid var(--border);border-radius:1rem;
-  box-shadow:0 16px 40px rgba(0,0,0,0.45);padding:0.4rem;display:flex;flex-direction:column;gap:0.15rem;
-  animation:packIn 0.2s ease;
+  position:absolute;
+  top:calc(100% + 0.35rem);
+  left:0;
+  right:0;
+  z-index:20;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  box-shadow:0 16px 40px rgba(0,0,0,0.45);
+  padding:0.4rem;
+  display:flex;
+  flex-direction:column;
+  gap:0.15rem;
+  /* closed state */
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(-8px) scale(0.97);
+  transform-origin:top center;
+  transition:
+    opacity 0.28s cubic-bezier(0.4,0,0.2,1),
+    transform 0.32s cubic-bezier(0.34,1.2,0.64,1),
+    visibility 0.28s,
+    box-shadow 0.3s;
 }
-@keyframes packIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+/* open on hover / focus-within / JS class */
+.packed-links:hover .packed-menu,
+.packed-links:focus-within .packed-menu,
+.packed-links.is-open .packed-menu{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0) scale(1);
+  box-shadow:0 20px 48px rgba(0,0,0,0.5), 0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
 .packed-item{
   display:flex;align-items:center;gap:0.65rem;padding:0.55rem 0.7rem;border-radius:0.75rem;
-  text-decoration:none;color:var(--text);transition:background 0.15s;
+  text-decoration:none;color:var(--text);
+  opacity:0;
+  transform:translateY(-4px);
+  transition:background 0.2s, opacity 0.25s ease, transform 0.25s ease;
 }
+/* stagger children when open */
+.packed-links:hover .packed-item,
+.packed-links:focus-within .packed-item,
+.packed-links.is-open .packed-item{
+  opacity:1;
+  transform:translateY(0);
+}
+.packed-links:hover .packed-item:nth-child(1),
+.packed-links:focus-within .packed-item:nth-child(1),
+.packed-links.is-open .packed-item:nth-child(1){ transition-delay:0.04s; }
+.packed-links:hover .packed-item:nth-child(2),
+.packed-links:focus-within .packed-item:nth-child(2),
+.packed-links.is-open .packed-item:nth-child(2){ transition-delay:0.07s; }
+.packed-links:hover .packed-item:nth-child(3),
+.packed-links:focus-within .packed-item:nth-child(3),
+.packed-links.is-open .packed-item:nth-child(3){ transition-delay:0.1s; }
+.packed-links:hover .packed-item:nth-child(4),
+.packed-links:focus-within .packed-item:nth-child(4),
+.packed-links.is-open .packed-item:nth-child(4){ transition-delay:0.13s; }
+.packed-links:hover .packed-item:nth-child(5),
+.packed-links:focus-within .packed-item:nth-child(5),
+.packed-links.is-open .packed-item:nth-child(5){ transition-delay:0.16s; }
+
 .packed-item:hover{background:color-mix(in srgb, var(--accent) 12%, transparent)}
 .packed-item-icon{font-size:1.15rem;flex-shrink:0}
 .packed-item strong{display:block;font-size:0.82rem;font-weight:600}

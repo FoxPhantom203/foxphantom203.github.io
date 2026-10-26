@@ -38,4 +38,49 @@
       this.textContent = document.body.classList.contains('foxor-cursor-enabled') ? 'Hide Foxy Cursor' : 'Toggle Foxy Cursor';
     });
   }
+
+  /* Styles feature */
+  const styleSelect = document.getElementById('styleSelect');
+  const STYLE_KEY = 'foxphantom-style';
+  function applyStyle(name) {
+    const valid = ['default', 'playful', 'scifi'];
+    const style = valid.includes(name) ? name : 'default';
+    document.body.setAttribute('data-style', style);
+    if (styleSelect) styleSelect.value = style;
+    try { localStorage.setItem(STYLE_KEY, style); } catch (_) {}
+  }
+  if (styleSelect) {
+    let saved = 'default';
+    try { saved = localStorage.getItem(STYLE_KEY) || 'default'; } catch (_) {}
+    applyStyle(saved);
+    styleSelect.addEventListener('change', function() {
+      applyStyle(this.value);
+    });
+  }
+
+  /* Packed links menu */
+  const packedBtn = document.getElementById('packedBtn');
+  const packedMenu = document.getElementById('packedMenu');
+  if (packedBtn && packedMenu) {
+    function closePacked() {
+      packedMenu.hidden = true;
+      packedBtn.setAttribute('aria-expanded', 'false');
+    }
+    function openPacked() {
+      packedMenu.hidden = false;
+      packedBtn.setAttribute('aria-expanded', 'true');
+    }
+    packedBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (packedMenu.hidden) openPacked(); else closePacked();
+    });
+    document.addEventListener('click', function(e) {
+      if (!packedMenu.hidden && !packedMenu.contains(e.target) && e.target !== packedBtn) {
+        closePacked();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !packedMenu.hidden) closePacked();
+    });
+  }
 })();

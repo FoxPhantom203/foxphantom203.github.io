@@ -31,43 +31,43 @@
       </select>
     </div>
 
-    <!-- Packed links button -->
-    <div class="packed-links">
+    <!-- Packed links button — closed by default, opens on hover -->
+    <div class="packed-links" id="packedLinks">
       <button type="button" class="packed-btn" id="packedBtn" aria-expanded="false" aria-controls="packedMenu">
         <span class="packed-icon">🔗</span>
         <span class="packed-text">Links</span>
         <span class="packed-chevron">▾</span>
       </button>
-      <div class="packed-menu" id="packedMenu" hidden>
-        <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="packed-item">
+      <div class="packed-menu" id="packedMenu" role="menu">
+        <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="packed-item" role="menuitem">
           <span class="packed-item-icon">🏛️</span>
           <span>
             <strong>Internet Archive</strong>
             <small>@architect787</small>
           </span>
         </a>
-        <a href="#" class="packed-item mock" title="Mock YouTube channel">
+        <a href="#" class="packed-item mock" title="Mock YouTube channel" role="menuitem">
           <span class="packed-item-icon">▶️</span>
           <span>
             <strong>YouTube · FoxPhantom</strong>
             <small>Mock channel · coming soon</small>
           </span>
         </a>
-        <a href="#" class="packed-item mock" title="Mock YouTube channel">
+        <a href="#" class="packed-item mock" title="Mock YouTube channel" role="menuitem">
           <span class="packed-item-icon">🎮</span>
           <span>
             <strong>YouTube · Games & Builds</strong>
             <small>Mock channel · coming soon</small>
           </span>
         </a>
-        <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="packed-item">
+        <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="packed-item" role="menuitem">
           <span class="packed-item-icon">💻</span>
           <span>
             <strong>GitHub</strong>
             <small>@FoxPhantom203</small>
           </span>
         </a>
-        <div class="packed-item coming-soon">
+        <div class="packed-item coming-soon" role="menuitem">
           <span class="packed-item-icon">✨</span>
           <span>
             <strong>More links</strong>

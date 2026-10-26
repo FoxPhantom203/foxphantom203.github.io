@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="FoxPhantom203 — Creative fox portfolio with Foxor AI widgets.">
+<meta name="description" content="FoxPhantom203 — Creative fox portfolio with Foxor AI widgets and multiple styles.">
 <title>FoxPhantom203 | Foxor AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&family=Fredoka:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-style="default">
 <div class="orb orb-1" aria-hidden="true"></div>
 <div class="orb orb-2" aria-hidden="true"></div>
 <div class="orb orb-3" aria-hidden="true"></div>
@@ -20,6 +20,63 @@
     <h1>FoxPhantom203</h1>
     <p class="tagline">Creative fox · coding & building</p>
     <p class="bio">Wassup! Making pages and shipping projects. Welcome to my corner of the internet.</p>
+
+    <!-- Styles feature -->
+    <div class="styles-panel">
+      <label class="styles-label" for="styleSelect">Style</label>
+      <select id="styleSelect" class="style-select" aria-label="Choose site style">
+        <option value="default">Default</option>
+        <option value="playful">Playful Minimalism</option>
+        <option value="scifi">Sci-Fi Dystopia</option>
+      </select>
+    </div>
+
+    <!-- Packed links button -->
+    <div class="packed-links">
+      <button type="button" class="packed-btn" id="packedBtn" aria-expanded="false" aria-controls="packedMenu">
+        <span class="packed-icon">🔗</span>
+        <span class="packed-text">Links</span>
+        <span class="packed-chevron">▾</span>
+      </button>
+      <div class="packed-menu" id="packedMenu" hidden>
+        <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="packed-item">
+          <span class="packed-item-icon">🏛️</span>
+          <span>
+            <strong>Internet Archive</strong>
+            <small>@architect787</small>
+          </span>
+        </a>
+        <a href="#" class="packed-item mock" title="Mock YouTube channel">
+          <span class="packed-item-icon">▶️</span>
+          <span>
+            <strong>YouTube · FoxPhantom</strong>
+            <small>Mock channel · coming soon</small>
+          </span>
+        </a>
+        <a href="#" class="packed-item mock" title="Mock YouTube channel">
+          <span class="packed-item-icon">🎮</span>
+          <span>
+            <strong>YouTube · Games & Builds</strong>
+            <small>Mock channel · coming soon</small>
+          </span>
+        </a>
+        <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="packed-item">
+          <span class="packed-item-icon">💻</span>
+          <span>
+            <strong>GitHub</strong>
+            <small>@FoxPhantom203</small>
+          </span>
+        </a>
+        <div class="packed-item coming-soon">
+          <span class="packed-item-icon">✨</span>
+          <span>
+            <strong>More links</strong>
+            <small>Coming soon…</small>
+          </span>
+        </div>
+      </div>
+    </div>
+
     <div class="links">
       <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener">GitHub</a>
       <a class="secondary" href="games/">Games</a>
@@ -55,6 +112,7 @@
   <footer>
     <a href="games/">Games</a> ·
     <a href="https://github.com/FoxPhantom203/foxphantom203.github.io">Source</a> ·
+    <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener">IA @architect787</a> ·
     foxphantom203.github.io
   </footer>
 </div>

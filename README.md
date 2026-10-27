@@ -62,5 +62,3 @@ Unless otherwise specified in a LICENSE file, the repository is © FoxPhantom203
 ## Contact
 
 GitHub: https://github.com/FoxPhantom203
-
-If you'd like any changes to this README (more personalization, badges, a project logo, or specific build instructions for the site's generator), tell me what generator or tech the site uses and I'll tailor it.

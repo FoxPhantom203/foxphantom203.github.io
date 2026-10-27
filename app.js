@@ -39,7 +39,13 @@
       contact: 'Contact',
       wContact: 'Email & GitHub for collaboration',
       switchVercel: 'Switch To Vercel',
-      source: 'Source'
+      source: 'Source',
+      langEn: 'English',
+      langRu: 'Russian',
+      langTr: 'Turkish',
+      langNo: 'Norwegian',
+      pageTitle: 'FoxPhantom203 | Foxor AI',
+      metaDesc: 'FoxPhantom203 — Creative fox portfolio with Foxor AI widgets and multiple styles.'
     },
     ru: {
       links: 'Ссылки',
@@ -77,7 +83,13 @@
       contact: 'Контакты',
       wContact: 'Почта и GitHub для сотрудничества',
       switchVercel: 'Перейти на Vercel',
-      source: 'Исходники'
+      source: 'Исходники',
+      langEn: 'Английский',
+      langRu: 'Русский',
+      langTr: 'Турецкий',
+      langNo: 'Норвежский',
+      pageTitle: 'FoxPhantom203 | Foxor AI',
+      metaDesc: 'FoxPhantom203 — креативное портфолио с виджетами Foxor AI и несколькими стилями.'
     },
     tr: {
       links: 'Bağlantılar',
@@ -104,7 +116,7 @@
       ossStrong: 'açık kaynak',
       ossAfter: '. Depoyu',
       repo: 'forkla',
-      widgetsTitle: 'Foxor AI Widget\'ları',
+      widgetsTitle: 'Foxor AI Widgetları',
       wFoxor: 'Foxor AI ile sohbet — açık kaynak asistan',
       wGames: 'Yılan, Hafıza, Tepki, Tıklayıcı, Labirent',
       codeSamples: 'Kod örnekleri',
@@ -114,8 +126,14 @@
       wAbout: 'FoxPhantom203 yaratıcı portföy',
       contact: 'İletişim',
       wContact: 'İş birliği için e-posta ve GitHub',
-      switchVercel: 'Vercel\'e geç',
-      source: 'Kaynak'
+      switchVercel: "Vercel'e geç",
+      source: 'Kaynak',
+      langEn: 'İngilizce',
+      langRu: 'Rusça',
+      langTr: 'Türkçe',
+      langNo: 'Norveççe',
+      pageTitle: 'FoxPhantom203 | Foxor AI',
+      metaDesc: 'FoxPhantom203 — Foxor AI widgetları ve birden fazla stile sahip yaratıcı tilki portföyü.'
     },
     no: {
       links: 'Lenker',
@@ -153,7 +171,13 @@
       contact: 'Kontakt',
       wContact: 'E-post og GitHub for samarbeid',
       switchVercel: 'Bytt til Vercel',
-      source: 'Kilde'
+      source: 'Kilde',
+      langEn: 'Engelsk',
+      langRu: 'Russisk',
+      langTr: 'Tyrkisk',
+      langNo: 'Norsk',
+      pageTitle: 'FoxPhantom203 | Foxor AI',
+      metaDesc: 'FoxPhantom203 — kreativ revportefølje med Foxor AI-widgets og flere stiler.'
     }
   };
 
@@ -162,18 +186,54 @@
     if (!valid.includes(lang)) lang = 'en';
     const dict = I18N[lang] || I18N.en;
     document.documentElement.lang = lang;
+
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       const key = el.getAttribute('data-i18n');
-      if (dict[key] != null) el.textContent = dict[key];
+      if (dict[key] == null) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
     });
+
+    /* language option labels (translated names) */
     const langSelect = document.getElementById('langSelect');
-    if (langSelect) langSelect.value = lang;
-    /* refresh cursor button label if toggled */
+    if (langSelect) {
+      const map = { en: 'langEn', ru: 'langRu', tr: 'langTr', no: 'langNo' };
+      Array.from(langSelect.options).forEach(function(opt) {
+        const k = map[opt.value];
+        if (k && dict[k]) opt.textContent = dict[k];
+      });
+      langSelect.value = lang;
+    }
+
+    /* style option labels */
+    const styleSelect = document.getElementById('styleSelect');
+    if (styleSelect) {
+      const styleMap = {
+        default: 'styleDefault',
+        playful: 'stylePlayful',
+        scifi: 'styleScifi',
+        voxel: 'styleVoxel',
+        aurora: 'styleAurora'
+      };
+      Array.from(styleSelect.options).forEach(function(opt) {
+        const k = styleMap[opt.value];
+        if (k && dict[k]) opt.textContent = dict[k];
+      });
+    }
+
+    if (dict.pageTitle) document.title = dict.pageTitle;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta && dict.metaDesc) meta.setAttribute('content', dict.metaDesc);
+
     const cursorToggle = document.getElementById('cursorToggle');
     if (cursorToggle) {
       const on = document.body.classList.contains('foxor-cursor-enabled');
       cursorToggle.textContent = on ? (dict.hideCursor || dict.toggleCursor) : dict.toggleCursor;
     }
+
     try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
     return lang;
   }
@@ -193,7 +253,7 @@
     if(!clock) return;
     const d = new Date();
     const lang = document.documentElement.lang || 'en';
-    const locale = { en: undefined, ru: 'ru-RU', tr: 'tr-TR', no: 'nb-NO' }[lang];
+    const locale = { en: 'en-US', ru: 'ru-RU', tr: 'tr-TR', no: 'nb-NO' }[lang] || 'en-US';
     clock.textContent = d.toLocaleString(locale,{weekday:'short',hour:'2-digit',minute:'2-digit',second:'2-digit'});
   }
   tick(); setInterval(tick,1000);

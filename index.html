@@ -18,29 +18,29 @@
 <div class="packed-links" id="packedLinks">
   <button type="button" class="packed-btn" id="packedBtn" aria-expanded="false" aria-controls="packedMenu">
     <span class="packed-icon">🔗</span>
-    <span class="packed-text">Links</span>
+    <span class="packed-text" data-i18n="links">Links</span>
     <span class="packed-chevron">▾</span>
   </button>
   <div class="packed-menu" id="packedMenu" role="menu">
     <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener noreferrer" class="packed-item" role="menuitem">
       <span class="packed-item-icon">🏛️</span>
       <span>
-        <strong>Internet Archive</strong>
+        <strong data-i18n="ia">Internet Archive</strong>
         <small>@architect787</small>
       </span>
     </a>
     <a href="#" class="packed-item mock" title="Mock YouTube channel" role="menuitem">
       <span class="packed-item-icon">▶️</span>
       <span>
-        <strong>YouTube · FoxPhantom</strong>
-        <small>Mock channel · coming soon</small>
+        <strong data-i18n="ytFox">YouTube · FoxPhantom</strong>
+        <small data-i18n="comingSoonMock">Mock channel · coming soon</small>
       </span>
     </a>
     <a href="#" class="packed-item mock" title="Mock YouTube channel" role="menuitem">
       <span class="packed-item-icon">🎮</span>
       <span>
-        <strong>YouTube · Games & Builds</strong>
-        <small>Mock channel · coming soon</small>
+        <strong data-i18n="ytGames">YouTube · Games & Builds</strong>
+        <small data-i18n="comingSoonMock">Mock channel · coming soon</small>
       </span>
     </a>
     <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener noreferrer" class="packed-item" role="menuitem">
@@ -53,8 +53,8 @@
     <div class="packed-item coming-soon" role="menuitem">
       <span class="packed-item-icon">✨</span>
       <span>
-        <strong>More links</strong>
-        <small>Coming soon…</small>
+        <strong data-i18n="moreLinks">More links</strong>
+        <small data-i18n="comingSoon">Coming soon…</small>
       </span>
     </div>
   </div>
@@ -65,56 +65,67 @@
     <div class="deco-row" aria-hidden="true">✦ 🦊 ✦</div>
     <div class="avatar-wrap" id="avatar" role="button" tabindex="0" aria-label="Fox avatar">🦊</div>
     <h1>FoxPhantom203</h1>
-    <p class="tagline">Creative fox · coding & building</p>
-    <p class="bio">Wassup! Making pages and shipping projects. Welcome to my corner of the internet.</p>
+    <p class="tagline" data-i18n="tagline">Creative fox · coding & building</p>
+    <p class="bio" data-i18n="bio">Wassup! Making pages and shipping projects. Welcome to my corner of the internet.</p>
+
+    <!-- Language -->
+    <div class="styles-panel lang-panel">
+      <label class="styles-label" for="langSelect" data-i18n="language">Language</label>
+      <select id="langSelect" class="style-select" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+        <option value="tr">Türkçe</option>
+        <option value="no">Norsk</option>
+      </select>
+    </div>
 
     <!-- Styles feature -->
     <div class="styles-panel">
-      <label class="styles-label" for="styleSelect">Style</label>
+      <label class="styles-label" for="styleSelect" data-i18n="style">Style</label>
       <select id="styleSelect" class="style-select" aria-label="Choose site style">
-        <option value="default">Default</option>
-        <option value="playful">Playful Minimalism</option>
-        <option value="scifi">Sci-Fi Dystopia</option>
-        <option value="voxel">Voxel</option>
-        <option value="aurora">Aurora</option>
+        <option value="default" data-i18n="styleDefault">Default</option>
+        <option value="playful" data-i18n="stylePlayful">Playful Minimalism</option>
+        <option value="scifi" data-i18n="styleScifi">Sci-Fi Dystopia</option>
+        <option value="voxel" data-i18n="styleVoxel">Voxel</option>
+        <option value="aurora" data-i18n="styleAurora">Aurora</option>
       </select>
     </div>
 
     <div class="links">
       <a href="https://github.com/FoxPhantom203" target="_blank" rel="noopener">GitHub</a>
-      <a class="secondary" href="games/">Games</a>
-      <a class="secondary" href="mailto:foxphantom203@tutamail.com">Email</a>
+      <a class="secondary" href="games/" data-i18n="games">Games</a>
+      <a class="secondary" href="mailto:foxphantom203@tutamail.com" data-i18n="email">Email</a>
     </div>
-    <button type="button" class="cursor-toggle" id="cursorToggle">Toggle Foxy Cursor</button>
-    <p class="oss">Foxor AI is <strong>open source</strong> on this site. Fork the <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" target="_blank" rel="noopener">repo</a>.</p>
+    <button type="button" class="cursor-toggle" id="cursorToggle" data-i18n="toggleCursor">Toggle Foxy Cursor</button>
+    <p class="oss"><span data-i18n="ossBefore">Foxor AI is</span> <strong data-i18n="ossStrong">open source</strong> <span data-i18n="ossAfter">on this site. Fork the</span> <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" target="_blank" rel="noopener" data-i18n="repo">repo</a>.</p>
     <div class="clock" id="clock"></div>
   </aside>
   <div class="widget-container">
     <div class="widget-header">
-      <span class="widget-title">Foxor AI Widgets</span>
+      <span class="widget-title" data-i18n="widgetsTitle">Foxor AI Widgets</span>
       <div class="widget-nav">
         <button class="widget-nav-btn prev" aria-label="Previous">‹</button>
         <button class="widget-nav-btn next" aria-label="Next">›</button>
       </div>
     </div>
     <div class="widget-scroll">
-      <div class="window material-window"><div class="window-header material-header"><span class="window-title">Foxor AI</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content material-content">Chat with Foxor AI — open-source assistant</div></div>
-      <div class="window"><div class="window-header"><span class="window-title">Games</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Snake, Memory, Reaction, Clicker, Maze</div></div>
-      <div class="window"><div class="window-header"><span class="window-title">Code Samples</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Python, JavaScript, Rust, Go, Java</div></div>
-      <div class="window"><div class="window-header"><span class="window-title">Projects</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Web pages and creative builds</div></div>
-      <div class="window"><div class="window-header"><span class="window-title">About</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">FoxPhantom203 creative portfolio</div></div>
-      <div class="window"><div class="window-header"><span class="window-title">Contact</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Email & GitHub for collaboration</div></div>
+      <div class="window material-window"><div class="window-header material-header"><span class="window-title">Foxor AI</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content material-content" data-i18n="wFoxor">Chat with Foxor AI — open-source assistant</div></div>
+      <div class="window"><div class="window-header"><span class="window-title" data-i18n="games">Games</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content" data-i18n="wGames">Snake, Memory, Reaction, Clicker, Maze</div></div>
+      <div class="window"><div class="window-header"><span class="window-title" data-i18n="codeSamples">Code Samples</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content">Python, JavaScript, Rust, Go, Java</div></div>
+      <div class="window"><div class="window-header"><span class="window-title" data-i18n="projects">Projects</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content" data-i18n="wProjects">Web pages and creative builds</div></div>
+      <div class="window"><div class="window-header"><span class="window-title" data-i18n="about">About</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content" data-i18n="wAbout">FoxPhantom203 creative portfolio</div></div>
+      <div class="window"><div class="window-header"><span class="window-title" data-i18n="contact">Contact</span><div class="window-controls"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span></div></div><div class="window-content" data-i18n="wContact">Email & GitHub for collaboration</div></div>
     </div>
   </div>
   <div class="switch-vercel-wrap">
     <a class="switch-vercel-btn" id="switchVercel" href="https://foxphantom203-two.vercel.app" target="_blank" rel="noopener noreferrer">
       <svg class="vercel-mark" viewBox="0 0 76 65" aria-hidden="true"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z"/></svg>
-      Switch To Vercel
+      <span data-i18n="switchVercel">Switch To Vercel</span>
     </a>
   </div>
   <footer>
-    <a href="games/">Games</a> ·
-    <a href="https://github.com/FoxPhantom203/foxphantom203.github.io">Source</a> ·
+    <a href="games/" data-i18n="games">Games</a> ·
+    <a href="https://github.com/FoxPhantom203/foxphantom203.github.io" data-i18n="source">Source</a> ·
     <a href="https://archive.org/details/@architect787" target="_blank" rel="noopener">IA @architect787</a> ·
     foxphantom203.github.io
   </footer>

@@ -178,14 +178,28 @@
       langNo: 'Norsk',
       pageTitle: 'FoxPhantom203 | Foxor AI',
       metaDesc: 'FoxPhantom203 — kreativ revportefølje med Foxor AI-widgets og flere stiler.'
-    }
+    },
+
+    lt: { ...I18N.en, language: 'Kalba', tagline: 'Kūrybinga lapė · programavimas ir kūrimas', games: 'Žaidimai', email: 'El. paštas', style: 'Stilius', about: 'Apie', contact: 'Kontaktai', projects: 'Projektai', source: 'Šaltinis', langEn: 'Anglų (JAV)', langRu: 'Rusų', langTr: 'Turkų', langNo: 'Norvegų', pageTitle: 'FoxPhantom203 | Foxor AI' },
+    ar: { ...I18N.en, language: 'اللغة', tagline: 'ثعلب مبدع · البرمجة والبناء', links: 'الروابط', games: 'الألعاب', email: 'البريد الإلكتروني', style: 'النمط', about: 'حول', contact: 'اتصل', projects: 'المشاريع', source: 'المصدر', langEn: 'الإنجليزية (الولايات المتحدة)', langRu: 'الروسية', langTr: 'التركية', langNo: 'النرويجية', switchVercel: 'انتقل إلى Vercel' },
+    ja: { ...I18N.en, language: '言語', tagline: 'クリエイティブなキツネ · コーディングと制作', links: 'リンク', games: 'ゲーム', email: 'メール', style: 'スタイル', about: '概要', contact: 'お問い合わせ', projects: 'プロジェクト', source: 'ソース', langEn: '英語（米国）', langRu: 'ロシア語', langTr: 'トルコ語', langNo: 'ノルウェー語', switchVercel: 'Vercel に切り替え' },
+    ko: { ...I18N.en, language: '언어', tagline: '창의적인 여우 · 코딩과 제작', links: '링크', games: '게임', email: '이메일', style: '스타일', about: '소개', contact: '연락처', projects: '프로젝트', source: '소스', langEn: '영어(미국)', langRu: '러시아어', langTr: '터키어', langNo: '노르웨이어', switchVercel: 'Vercel로 전환' },
+    'zh-Hans': { ...I18N.en, language: '语言', tagline: '创意狐狸 · 编程与创作', links: '链接', games: '游戏', email: '电子邮件', style: '风格', about: '关于', contact: '联系', projects: '项目', source: '源代码', langEn: '英语（美国）', langRu: '俄语', langTr: '土耳其语', langNo: '挪威语', switchVercel: '切换到 Vercel' },
+    'zh-Hant': { ...I18N.en, language: '語言', tagline: '創意狐狸 · 程式設計與創作', links: '連結', games: '遊戲', email: '電子郵件', style: '風格', about: '關於', contact: '聯絡', projects: '專案', source: '原始碼', langEn: '英語（美國）', langRu: '俄語', langTr: '土耳其語', langNo: '挪威語', switchVercel: '切換至 Vercel' },
+    la: { ...I18N.en, language: 'Lingua', tagline: 'Vulpes creatrix · codificatio et constructio', links: 'Nexus', games: 'Ludi', email: 'Epistula', style: 'Stilus', about: 'De nobis', contact: 'Contactus', projects: 'Opera', source: 'Fons', langEn: 'Anglica (Americae)', langRu: 'Russica', langTr: 'Turcica', langNo: 'Norvegica' },
+    cu: { ...I18N.en, language: 'Ѩꙁꙑкъ', tagline: 'Творьчьскъ лисъ · писаниѥ и сътворениѥ', links: 'Съвѣти', games: 'Игры', email: 'Почьта', style: 'Образъ', about: 'О насъ', contact: 'Съвѧꙁь', projects: 'Дѣла', source: 'Источьникъ' },
+    shx: { ...I18N.en, language: 'Tongue', tagline: 'A merry fox · coding and craft', links: 'Links', games: 'Pastimes', email: 'Letters', style: 'Fashion', about: 'Concerning', contact: 'Speak with me', projects: 'Works', source: 'Source', toggleCursor: 'Call forth the Foxy Cursor', switchVercel: 'Journey to Vercel' },
+    lol: { ...I18N.en, language: 'LANGWIDGE', tagline: 'CREATIVE FOX · CODIN AN BUILDS', links: 'LINKZ', games: 'GAEMZ', email: 'E-MAILZ', style: 'STYLES', about: 'BOUT ME', contact: 'TALK 2 ME', projects: 'PROJEKTZ', source: 'SOURZ', toggleCursor: 'TOGGLE FOXY CURSOR PLZ', switchVercel: 'GO 2 VERCEL' },
+    'en-AU': { ...I18N.en, language: 'Language', tagline: 'Creative fox · coding & building, mate', games: 'Games', email: 'Email', style: 'Style', about: 'About', contact: 'Contact', projects: 'Projects', source: 'Source', switchVercel: 'Switch to Vercel' },
+    'en-US': { ...I18N.en, language: 'Language', tagline: 'Creative fox · coding & building', games: 'Games', email: 'Email', style: 'Style', about: 'About', contact: 'Contact', projects: 'Projects', source: 'Source' },
   };
 
   function applyLang(lang) {
-    const valid = ['en', 'ru', 'tr', 'no'];
+    const valid = ['en', 'ru', 'tr', 'no', 'lt', 'ar', 'ja', 'ko', 'zh-Hans', 'zh-Hant', 'la', 'cu', 'shx', 'lol', 'en-AU'];
     if (!valid.includes(lang)) lang = 'en';
     const dict = I18N[lang] || I18N.en;
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'shx' || lang === 'lol' ? 'en' : lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       const key = el.getAttribute('data-i18n');
@@ -253,7 +267,7 @@
     if(!clock) return;
     const d = new Date();
     const lang = document.documentElement.lang || 'en';
-    const locale = { en: 'en-US', ru: 'ru-RU', tr: 'tr-TR', no: 'nb-NO' }[lang] || 'en-US';
+    const locale = { en: 'en-US', ru: 'ru-RU', tr: 'tr-TR', no: 'nb-NO', lt: 'lt-LT', ar: 'ar', ja: 'ja-JP', ko: 'ko-KR', 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-TW', la: 'la', cu: 'ru-RU', shx: 'en-GB', lol: 'en-US', 'en-AU': 'en-AU' }[lang] || 'en-US';
     clock.textContent = d.toLocaleString(locale,{weekday:'short',hour:'2-digit',minute:'2-digit',second:'2-digit'});
   }
   tick(); setInterval(tick,1000);

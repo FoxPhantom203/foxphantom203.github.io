@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex">
+  <title>404 — Page Not Found | FoxPhantom203</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111111;
+      --surface: #1b1b1b;
+      --surface-hover: #252525;
+      --text: #f5f5f5;
+      --muted: #999999;
+      --accent: #ff791f;
+      --border: #303030;
+    }
+
+    body.light {
+      color-scheme: light;
+      --bg: #fff8f2;
+      --surface: #ffffff;
+      --surface-hover: #fff0e5;
+      --text: #222222;
+      --muted: #777777;
+      --accent: #e96916;
+      --border: #eadbd0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+
+    button, a {
+      font: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      text-align: center;
+      position: relative;
+    }
+
+    .brand {
+      color: var(--accent);
+      font-size: 19px;
+      font-weight: 850;
+      letter-spacing: -1px;
+      margin-bottom: 30px;
+    }
+
+    .fox-container {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 10px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .25s;
+    }
+
+    .fox-container:hover {
+      transform: scale(1.07) rotate(-3deg);
+    }
+
+    .fox {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: invert(52%) sepia(96%) saturate(1500%)
+              hue-rotate(344deg) brightness(103%);
+      animation: float 3s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    .error-code {
+      font-size: clamp(75px, 18vw, 125px);
+      font-weight: 950;
+      line-height: 1;
+      letter-spacing: -9px;
+      color: var(--accent);
+      margin: 10px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    h1 {
+      font-size: clamp(23px, 5vw, 32px);
+      margin: 15px 0 8px;
+      letter-spacing: -1px;
+    }
+
+    .description {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-top: 28px;
+      border-radius: 18px;
+    }
+
+    .reaction {
+      min-height: 27px;
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button, .home-link {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-hover);
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    button:hover, .home-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #17100b;
+      border-color: var(--accent);
+    }
+
+    .primary:hover {
+      background: #ff934d;
+    }
+
+    .extras {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .extras button {
+      font-size: 12px;
+      padding: 9px 13px;
+    }
+
+    .footer {
+      margin-top: 27px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .paw {
+      position: fixed;
+      pointer-events: none;
+      font-size: 19px;
+      animation: pawFade .8s forwards;
+      z-index: 10;
+    }
+
+    @keyframes pawFade {
+      from { opacity: 1; transform: scale(.5) rotate(0deg); }
+      to { opacity: 0; transform: scale(1.5) rotate(30deg); }
+    }
+
+    .shake {
+      animation: shake .4s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-9px); }
+      40% { transform: translateX(9px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+
+    .secret {
+      color: var(--accent);
+      font-size: 13px;
+      margin-top: 15px;
+      min-height: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .fox-container {
+        width: 145px;
+        height: 145px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .buttons > * {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container" id="main">
+
+    <div class="brand">FOXPHANTOM203</div>
+
+    <div class="fox-container" id="foxContainer"
+         title="Click the fox!">
+      <img
+        class="fox"
+        id="fox"
+        src="https://w7.pngwing.com/pngs/691/473/png-transparent-geometric-fox-head-outline-bold-line-art-fox-logo.png"
+        alt="Geometric fox head mascot"
+        draggable="false"
+      >
+    </div>
+
+    <div class="error-code" id="errorCode"
+         title="Click me five times!">
+      404
+    </div>
+
+    <h1>Yikes! The page ran away.</h1>
+
+    <p class="description">
+      It vanished into thin air.
+      We searched everywhere, but this page
+      seems to have escaped into another dimension.
+    </p>
+
+    <section class="panel">
+
+      <div class="reaction" id="reaction" aria-live="polite">
+        The fox is investigating the missing page...
+      </div>
+
+      <div class="buttons">
+        <a class="home-link primary" href="/">
+          Return Home
+        </a>
+
+        <button id="backButton">
+          Go Back
+        </button>
+
+        <button id="investigateButton">
+          Ask the Fox
+        </button>
+      </div>
+
+      <div class="extras">
+        <button id="randomButton">
+          Random Excuse
+        </button>
+
+        <button id="themeButton">
+          Toggle Theme
+        </button>
+
+        <button id="copyButton">
+          Copy Page URL
+        </button>
+      </div>
+
+      <div class="secret" id="secret"></div>
+
+    </section>
+
+    <footer class="footer">
+      FoxPhantom203 · Even foxes lose their way sometimes.
+    </footer>
+
+  </main>
+
+  <script>
+    const reaction = document.getElementById("reaction");
+    const fox = document.getElementById("fox");
+    const main = document.getElementById("main");
+    const secret = document.getElementById("secret");
+
+    const messages = [
+      "The fox checked behind the server. Nothing.",
+      "A mysterious dimension swallowed this page.",
+      "The page escaped. The fox is disappointed.",
+      "404? More like 4-fox-4.",
+      "The fox suspects a broken internet portal.",
+      "We found pawprints. But no page.",
+      "The page went on vacation without telling us.",
+      "The fox searched the entire filesystem.",
+      "Maybe the page is playing hide and seek.",
+      "Nope. Even the fox cannot find this one."
+    ];
+
+    let investigations = 0;
+    let secretClicks = 0;
+    let foxClicks = 0;
+
+    function showMessage(message) {
+      reaction.textContent = message;
+    }
+
+    function randomMessage() {
+      const message =
+        messages[Math.floor(Math.random() * messages.length)];
+
+      showMessage(message);
+    }
+
+    document.getElementById("randomButton")
+      .addEventListener("click", randomMessage);
+
+    document.getElementById("investigateButton")
+      .addEventListener("click", () => {
+        investigations++;
+
+        const responses = [
+          "Investigation complete. No page found.",
+          "The fox found a suspicious pawprint!",
+          "The fox is checking another dimension.",
+          "The server denies knowing anything.",
+          "Case still open. The fox refuses to give up."
+        ];
+
+        showMessage(
+          responses[(investigations - 1) % responses.length]
+        );
+      });
+
+    document.getElementById("backButton")
+      .addEventListener("click", () => {
+        if (history.length > 1) {
+          history.back();
+        } else {
+          location.href = "/";
+        }
+      });
+
+    document.getElementById("themeButton")
+      .addEventListener("click", () => {
+        document.body.classList.toggle("light");
+
+        showMessage(
+          document.body.classList.contains("light")
+            ? "The fox turned on the lights."
+            : "The fox prefers the dark theme."
+        );
+      });
+
+    document.getElementById("copyButton")
+      .addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(location.href);
+          showMessage("Page URL copied successfully!");
+        } catch {
+          showMessage("Copy unavailable. Select the URL manually.");
+        }
+      });
+
+    function foxReaction() {
+      foxClicks++;
+
+      const responses = [
+        "The fox says hello!",
+        "The fox is looking at you.",
+        "The fox wants its missing page back.",
+        "The fox has officially become suspicious.",
+        "The fox approves of your clicking skills."
+      ];
+
+      showMessage(responses[(foxClicks - 1) % responses.length]);
+
+      fox.classList.remove("shake");
+      void fox.offsetWidth;
+      fox.classList.add("shake");
+    }
+
+    document.getElementById("foxContainer")
+      .addEventListener("click", foxReaction);
+
+    document.getElementById("errorCode")
+      .addEventListener("click", () => {
+        secretClicks++;
+
+        if (secretClicks >= 5) {
+          secret.textContent =
+            "SECRET UNLOCKED: The fox was here all along. 🦊";
+          secretClicks = 0;
+        } else {
+          secret.textContent =
+            `Secret progress: ${secretClicks}/5`;
+        }
+      });
+
+    // Decorative pawprints follow pointer clicks.
+    document.addEventListener("click", (event) => {
+      const paw = document.createElement("span");
+
+      paw.className = "paw";
+      paw.textContent = "🐾";
+      paw.style.left = event.clientX + "px";
+      paw.style.top = event.clientY + "px";
+
+      document.body.appendChild(paw);
+
+      setTimeout(() => paw.remove(), 850);
+    });
+
+    // Keyboard shortcuts.
+    document.addEventListener("keydown", (event) => {
+      if (event.key.toLowerCase() === "r") {
+        randomMessage();
+      }
+
+      if (event.key.toLowerCase() === "h") {
+        location.href = "/";
+      }
+    });
+  </script>
+</body>
+</html>
